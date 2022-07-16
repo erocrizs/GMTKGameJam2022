@@ -11,7 +11,7 @@ public class DieMovement : MonoBehaviour
     [SerializeField]
     float verticalRollTime;
 
-    public bool isMoving = false;
+    bool isMoving = false;
     float moveLerp = 1;
     float moveDirection = 0;
     Vector2 preMovementPosition;
