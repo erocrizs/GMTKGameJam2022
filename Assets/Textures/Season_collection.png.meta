@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 20
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -3198,6 +3198,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Button
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 796
+        width: 32
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01c2cb0d13a3f6345ab7136a5c2ce0f3
+      internalID: 1719215725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -3209,7 +3230,6 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      WoodenMiddlePlatform: -6903368
       Season_collection_110: 188012984
       Water_2: 1695946893
       Season_collection_75: 1557370416
@@ -3353,7 +3373,9 @@ TextureImporter:
       Season_collection_136: 261680040
       Season_collection_104: 1620875963
       Season_collection_129: 1811614742
+      Button: 1719215725
       Season_collection_18: 836175240
+      WoodenMiddlePlatform: -6903368
       Season_collection_90: 1404598950
       Season_collection_25: 186280896
   spritePackingTag: 

@@ -11,7 +11,7 @@ public class DieMovement : MonoBehaviour
     [SerializeField]
     float verticalRollTime;
 
-    bool isMoving = false;
+    public bool isMoving = false;
     float moveLerp = 1;
     float moveDirection = 0;
     Vector2 preMovementPosition;
@@ -113,13 +113,13 @@ public class DieMovement : MonoBehaviour
 
     void RollHorizontalFromUp ()
     {
-        float progress = Mathf.Min(Time.fixedDeltaTime / verticalRollTime, 1 - moveLerp);
+        float progress = Mathf.Min(Time.fixedDeltaTime / horizontalRollTime, 1 - moveLerp);
         RollHorizontalBase(progress);
     }
 
     void RollUp ()
     {
-        float progress = Mathf.Min(Time.fixedDeltaTime / verticalRollTime, 1 - moveLerp);
+        float progress = Mathf.Min(Time.fixedDeltaTime / horizontalRollTime, 1 - moveLerp);
         moveLerp += progress;
         float degree = moveLerp * 90;
         float rotationalDirection = -1 * Mathf.Sign(moveDirection);
