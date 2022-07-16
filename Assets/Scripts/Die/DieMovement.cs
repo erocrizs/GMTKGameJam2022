@@ -8,6 +8,8 @@ public class DieMovement : MonoBehaviour
     float rollTime;
 
     bool isMoving = false;
+    bool isGrounded = false;
+
     float moveLerp = 1;
     float moveDirection = 0;
     Vector2 preMovementPosition;
@@ -39,8 +41,9 @@ public class DieMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 0.6f, 1 << LayerMask.NameToLayer("Ground"));
         float movement = Input.GetAxis("Horizontal");
-        if (!isMoving)
+        if (!isMoving && isGrounded)
         {
             isMoving = movement >= 0.01 || movement <= -0.01;
             if (isMoving)
@@ -73,6 +76,10 @@ public class DieMovement : MonoBehaviour
                 rb.simulated = true;
                 rb.position = RoundVector(rb.position);
             }
+        }
+        else
+        {
+            rb.position = new Vector2(Mathf.RoundToInt(rb.position.x), rb.position.y);
         }
     }
 }
