@@ -784,7 +784,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Season_collection_35
+      name: WoodenMiddlePlatform
       rect:
         serializedVersion: 2
         x: 240
@@ -3209,6 +3209,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      WoodenMiddlePlatform: -6903368
       Season_collection_110: 188012984
       Water_2: 1695946893
       Season_collection_75: 1557370416
@@ -3273,10 +3274,9 @@ TextureImporter:
       Season_collection_111: -1245063809
       WinterBackground: 1409270562
       AutumnBackground: 34203461
-      Season_collection_35: -6903368
+      Season_collection_96: -1963351317
       Season_collection_58: -896955891
       Season_collection_24: -141700905
-      Season_collection_96: -1963351317
       Ice: 68552501
       Season_collection_113: -62269892
       Season_collection_42: -814329451
