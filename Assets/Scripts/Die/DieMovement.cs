@@ -113,13 +113,13 @@ public class DieMovement : MonoBehaviour
 
     void RollHorizontalFromUp ()
     {
-        float progress = Mathf.Min(Time.fixedDeltaTime / verticalRollTime, 1 - moveLerp);
+        float progress = Mathf.Min(Time.fixedDeltaTime / horizontalRollTime, 1 - moveLerp);
         RollHorizontalBase(progress);
     }
 
     void RollUp ()
     {
-        float progress = Mathf.Min(Time.fixedDeltaTime / verticalRollTime, 1 - moveLerp);
+        float progress = Mathf.Min(Time.fixedDeltaTime / horizontalRollTime, 1 - moveLerp);
         moveLerp += progress;
         float degree = moveLerp * 90;
         float rotationalDirection = -1 * Mathf.Sign(moveDirection);
