@@ -47,7 +47,7 @@ public class DieMovement : MonoBehaviour
         if (!isMoving)
         {
             bool isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 0.6f, 1 << LayerMask.NameToLayer("Ground"));
-            float movement = Input.GetAxis("Horizontal");
+            float movement = Input.GetAxis("Horizontal Die");
             isMoving = movement >= 0.01 || movement <= -0.01;
             if (isMoving && isGrounded)
             {

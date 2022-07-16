@@ -11,6 +11,7 @@ public class OliveMovement : MonoBehaviour
     float burstJumpSpeed;
 
     Rigidbody2D rb;
+    OliveAnimator animator;
 
     bool IsRising => rb.velocity.y > 0;
     bool IsFalling => rb.velocity.y < 0;
@@ -21,6 +22,7 @@ public class OliveMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponentInChildren<OliveAnimator>();
     }
 
     // Update is called once per frame
@@ -28,11 +30,12 @@ public class OliveMovement : MonoBehaviour
     {
         Move();
         Jump();
+        Animate();
     }
 
     void Move ()
     {
-        float movement = Input.GetAxis("Horizontal");
+        float movement = Input.GetAxis("Horizontal Olive");
         if (movement >= 0.01 || movement <= -0.01)
         {
             rb.velocity = new Vector2(Mathf.Sign(movement) * runSpeed, rb.velocity.y);
@@ -57,5 +60,14 @@ public class OliveMovement : MonoBehaviour
                 rb.AddForce(new Vector2(0, burstJumpSpeed), ForceMode2D.Impulse);
             }
         }
+    }
+
+    void Animate ()
+    {
+        animator.SetDirection(rb.velocity.x);
+        animator.IsFalling = IsFalling;
+        animator.IsRising = IsRising;
+        animator.IsRunning = IsRunning;
+        animator.IsGrounded = IsGrounded;
     }
 }
