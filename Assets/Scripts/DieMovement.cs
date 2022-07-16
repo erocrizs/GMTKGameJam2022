@@ -63,6 +63,7 @@ public class DieMovement : MonoBehaviour
             moveLerp += progress;
             float degree = moveLerp * 90;
             transform.position = LerpPosition(degree, moveDirection);
+            transform.Rotate(0, 0, progress * -90 * Mathf.Sign(moveDirection));
 
             if (moveLerp == 1)
             {
