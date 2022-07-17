@@ -42,6 +42,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Front
+  - name: Ground
     uniqueID: 3984704867
+    locked: 0
+  - name: Die
+    uniqueID: 3274878937
+    locked: 0
+  - name: Olive
+    uniqueID: 3879745153
     locked: 0
