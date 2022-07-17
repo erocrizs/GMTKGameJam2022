@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2814155464998691959}
   - component: {fileID: 6805681003858651225}
   - component: {fileID: 7584177315385418582}
+  - component: {fileID: 737311558474690755}
   m_Layer: 0
   m_Name: Flowers
   m_TagString: Untagged
@@ -125,3 +126,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: 
+--- !u!114 &737311558474690755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3823204692340904106}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc44bd219a6c6b74c8bf375f3ff51be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
