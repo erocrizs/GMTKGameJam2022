@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class SeasonalPlayer : MonoBehaviour
 {
-    public SeasonManager seasonManager;
-
     public AudioSource springMusic;
     public AudioSource summerMusic;
     public AudioSource autumnMusic;
@@ -33,17 +31,14 @@ public class SeasonalPlayer : MonoBehaviour
         seasonMusicMapping.Add(Season.Autumn, autumnMusic);
         seasonMusicMapping.Add(Season.Winter, winterMusic);
 
-        if (!seasonManager)
-        {
-            seasonManager = FindObjectOfType<SeasonManager>();
-        }
-
+        SeasonManager seasonManager = FindObjectOfType<SeasonManager>();
         changeSeason(seasonManager.season);
     }
 
     // Update is called once per frame
     void Update()
     {
+        SeasonManager seasonManager = FindObjectOfType<SeasonManager>();
         if (currentSeason != seasonManager.season)
         {
             changeSeason(seasonManager.season);
