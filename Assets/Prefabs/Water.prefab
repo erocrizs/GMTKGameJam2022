@@ -292,6 +292,7 @@ GameObject:
   - component: {fileID: 9019603723601235430}
   - component: {fileID: 2355299764259271015}
   - component: {fileID: 4721402524698456506}
+  - component: {fileID: 5524007811534791843}
   m_Layer: 0
   m_Name: WaterDeath
   m_TagString: Untagged
@@ -338,7 +339,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.25}
+  m_Size: {x: 0.4, y: 0.25}
   m_EdgeRadius: 0
 --- !u!114 &4721402524698456506
 MonoBehaviour:
@@ -350,5 +351,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d5e9e5543e42ec4eb9d941555ca063a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5524007811534791843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8486103305333761410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48912869a30c88b4cb93c3ba2db061f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
