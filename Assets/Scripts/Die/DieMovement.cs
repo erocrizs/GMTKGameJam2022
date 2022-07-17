@@ -50,7 +50,7 @@ public class DieMovement : MonoBehaviour
         Move = RollHorizontal;
         oliveCollider = olive.GetComponent<BoxCollider2D>();
         dieCollider = GetComponent<BoxCollider2D>();
-        Physics2D.IgnoreLayerCollision(0, LayerMask.NameToLayer("OliveGround"));
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Die"), LayerMask.NameToLayer("OliveGround"));
     }
 
     // Update is called once per frame
