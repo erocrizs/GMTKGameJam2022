@@ -18,7 +18,6 @@ public class OliveDetector : MonoBehaviour
     {
         if (collision.gameObject.tag == "Olive")
         {
-            Debug.Log("Olive In");
             isOliveInside = true;
         }
     }
@@ -27,7 +26,6 @@ public class OliveDetector : MonoBehaviour
     {
         if (collision.gameObject.tag == "Olive")
         {
-            Debug.Log("Olive Out");
             isOliveInside = false;
 
             foreach (Action subscriber in exitSubscriber)

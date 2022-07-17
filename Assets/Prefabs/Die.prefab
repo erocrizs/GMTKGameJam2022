@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 793863685}
   - component: {fileID: 793863686}
   - component: {fileID: 793863687}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Olive Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}

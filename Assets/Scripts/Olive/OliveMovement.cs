@@ -16,7 +16,7 @@ public class OliveMovement : MonoBehaviour
     bool IsRising => rb.velocity.y > 0;
     bool IsFalling => rb.velocity.y < 0;
     bool IsRunning => rb.velocity.x != 0;
-    bool IsGrounded => Physics2D.Raycast(transform.position, Vector2.down, 0.01f, 1 << LayerMask.NameToLayer("Ground"));
+    bool IsGrounded => Physics2D.Raycast(transform.position, Vector2.down, 0.01f, LayerMask.GetMask("Ground", "Die"));
 
     // Start is called before the first frame update
     void Start()

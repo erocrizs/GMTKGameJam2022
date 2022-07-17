@@ -180,10 +180,8 @@ public class DieMovement : MonoBehaviour
 
     void Fall ()
     {
-        Debug.Log("Still falling...");
         if (IsGrounded)
         {
-            Debug.Log("Grounded!");
             rb.isKinematic = true;
             MoveStop();
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -225,5 +223,6 @@ public class DieMovement : MonoBehaviour
     void IgnoreOliveCollision (bool ignore)
     {
         Physics2D.IgnoreCollision(oliveCollider, dieCollider, ignore);
+        this.gameObject.layer = ignore ? 0 : LayerMask.NameToLayer("Die");
     }
 }
