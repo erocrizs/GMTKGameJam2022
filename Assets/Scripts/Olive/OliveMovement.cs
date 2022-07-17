@@ -49,7 +49,6 @@ public class OliveMovement : MonoBehaviour
     void Jump ()
     {
         bool grounded = IsGrounded;
-        Debug.Log(grounded);
         if (grounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, 0);

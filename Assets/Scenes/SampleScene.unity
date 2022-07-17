@@ -873,6 +873,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1310833526 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5627422540945471123, guid: 7823572705a813e4aa0bcda28d7c1120, type: 3}
+  m_PrefabInstance: {fileID: 5627422541527444960}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5194054558600508955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -880,6 +885,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5194054560024152986, guid: 2bd9a36dbdf834848955c3899e33fae3, type: 3}
+      propertyPath: olive
+      value: 
+      objectReference: {fileID: 1310833526}
     - target: {fileID: 5194054560024152987, guid: 2bd9a36dbdf834848955c3899e33fae3, type: 3}
       propertyPath: m_Name
       value: Die
@@ -894,7 +903,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5194054560024152990, guid: 2bd9a36dbdf834848955c3899e33fae3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 5194054560024152990, guid: 2bd9a36dbdf834848955c3899e33fae3, type: 3}
       propertyPath: m_LocalPosition.z
