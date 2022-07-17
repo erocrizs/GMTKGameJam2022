@@ -75,12 +75,10 @@ public class SeasonalPlayer : MonoBehaviour
         for (int i = 1; i <= MUSIC_STEP; i++)
         {
             float nextVolume = Mathf.Max(0f, initialVolume - (maxVolume * (i / MUSIC_STEP)));
-            Debug.Log("Lowering volume of " + music.name + " to " + nextVolume);
             music.volume = nextVolume;
 
             if (nextVolume == 0)
             {
-                Debug.Log("Stop lowering volume of " + music.name);
                 break;
             }
 
@@ -94,12 +92,10 @@ public class SeasonalPlayer : MonoBehaviour
         for (int i = 1; i <= MUSIC_STEP; i++)
         {
             float nextVolume = Mathf.Min(maxVolume, initialVolume + (maxVolume * (i / MUSIC_STEP)));
-            Debug.Log("Raising volume of " + music.name + " to " + nextVolume);
             music.volume = nextVolume;
 
             if (nextVolume == maxVolume)
             {
-                Debug.Log("Stop raising volume of " + music.name);
                 break;
             }
 
