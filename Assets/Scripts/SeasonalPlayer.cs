@@ -12,22 +12,26 @@ public class SeasonalPlayer : MonoBehaviour
     public AudioSource autumnMusic;
     public AudioSource winterMusic;
 
-    private Dictionary<Season, AudioSource> seasonObjectMapping;
+    private Dictionary<Season, AudioSource> seasonMusicMapping;
     private Season currentSeason;
 
     [SerializeField]
     float switchTime;
-    const int MUSIC_STEP = 10;
+
+    [SerializeField]
+    float maxVolume;
+
+    const float MUSIC_STEP = 10;
     float CoroutineDelay => switchTime / MUSIC_STEP;
 
     // Start is called before the first frame update
     void Start()
     {
-        seasonObjectMapping = new Dictionary<Season, AudioSource>();
-        seasonObjectMapping.Add(Season.Spring, springMusic);
-        seasonObjectMapping.Add(Season.Summer, summerMusic);
-        seasonObjectMapping.Add(Season.Autumn, autumnMusic);
-        seasonObjectMapping.Add(Season.Winter, winterMusic);
+        seasonMusicMapping = new Dictionary<Season, AudioSource>();
+        seasonMusicMapping.Add(Season.Spring, springMusic);
+        seasonMusicMapping.Add(Season.Summer, summerMusic);
+        seasonMusicMapping.Add(Season.Autumn, autumnMusic);
+        seasonMusicMapping.Add(Season.Winter, winterMusic);
 
         if (!seasonManager)
         {
@@ -40,10 +44,6 @@ public class SeasonalPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!seasonManager)
-        {
-            seasonManager = FindObjectOfType<SeasonManager>();
-        }
         if (currentSeason != seasonManager.season)
         {
             changeSeason(seasonManager.season);
@@ -55,34 +55,16 @@ public class SeasonalPlayer : MonoBehaviour
         StopAllCoroutines();
 
         currentSeason = newSeason;
-        HashSet<AudioSource> toActivate = new HashSet<AudioSource>();
-        HashSet<AudioSource> toDeactivate = new HashSet<AudioSource>();
 
-        foreach (var item in seasonObjectMapping)
+        foreach (var item in seasonMusicMapping)
         {
             if (item.Key == currentSeason)
             {
-                toActivate.Add(item.Value);
+                StartCoroutine(Play(item.Value));
             }
             else
             {
-                toDeactivate.Add(item.Value);
-            }
-        }
-
-        toDeactivate.ExceptWith(toActivate);
-        foreach (var seasonMusic in toActivate)
-        {
-            if (seasonMusic)
-            {
-                StartCoroutine(Play(seasonMusic));
-            }
-        }
-        foreach (var seasonMusic in toDeactivate)
-        {
-            if (seasonMusic)
-            {
-                StartCoroutine(Silence(seasonMusic));
+                StartCoroutine(Silence(item.Value));
             }
         }
     }
@@ -92,11 +74,13 @@ public class SeasonalPlayer : MonoBehaviour
         float initialVolume = music.volume;
         for (int i = 1; i <= MUSIC_STEP; i++)
         {
-            float nextVolume = Mathf.Max(0f, initialVolume - (i / 10f));
+            float nextVolume = Mathf.Max(0f, initialVolume - (maxVolume * (i / MUSIC_STEP)));
+            Debug.Log("Lowering volume of " + music.name + " to " + nextVolume);
             music.volume = nextVolume;
 
             if (nextVolume == 0)
             {
+                Debug.Log("Stop lowering volume of " + music.name);
                 break;
             }
 
@@ -109,11 +93,13 @@ public class SeasonalPlayer : MonoBehaviour
         float initialVolume = music.volume;
         for (int i = 1; i <= MUSIC_STEP; i++)
         {
-            float nextVolume = Mathf.Min(1f, initialVolume + (i / 10f));
+            float nextVolume = Mathf.Min(maxVolume, initialVolume + (maxVolume * (i / MUSIC_STEP)));
+            Debug.Log("Raising volume of " + music.name + " to " + nextVolume);
             music.volume = nextVolume;
 
-            if (nextVolume == 1)
+            if (nextVolume == maxVolume)
             {
+                Debug.Log("Stop raising volume of " + music.name);
                 break;
             }
 

@@ -12,6 +12,11 @@ public class SeasonButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!seasonManager)
+        {
+            seasonManager = FindObjectOfType<SeasonManager>();
+        }
+
         previousSeason = seasonManager.season;
     }
 
