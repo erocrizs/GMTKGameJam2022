@@ -20,32 +20,15 @@ public class SeasonButton : MonoBehaviour
         previousSeason = seasonManager.season;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void Update()
     {
-        if (collision.gameObject == dieSeasonFace.gameObject)
+        if (Physics2D.Raycast(transform.position, Vector2.up, 0.01f, LayerMask.GetMask("Die")))
         {
             if (previousSeason != dieSeasonFace.dieSeason)
             {
+                Debug.Log("Change season to " + dieSeasonFace.dieSeason);
                 seasonManager.season = dieSeasonFace.dieSeason;
             }
-            previousSeason = dieSeasonFace.dieSeason;
-        }
-    }
-
-    void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject == dieSeasonFace.gameObject && previousSeason != dieSeasonFace.dieSeason)
-        {
-            seasonManager.season = dieSeasonFace.dieSeason;
-            previousSeason = dieSeasonFace.dieSeason;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject == dieSeasonFace.gameObject && previousSeason != dieSeasonFace.dieSeason)
-        {
-            seasonManager.season = dieSeasonFace.dieSeason;
             previousSeason = dieSeasonFace.dieSeason;
         }
     }

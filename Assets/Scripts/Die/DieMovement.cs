@@ -85,6 +85,13 @@ public class DieMovement : MonoBehaviour
                 moveLerp = 0;
                 preMovementPosition = RoundVector(rb.position);
             }
+            else if (!isMoving && !IsGrounded)
+            {
+                RollStart(0, Fall);
+                moveLerp = 1;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                rb.isKinematic = false;
+            }
         }
     }
 

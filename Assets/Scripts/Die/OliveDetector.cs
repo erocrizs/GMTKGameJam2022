@@ -22,7 +22,6 @@ public class OliveDetector : MonoBehaviour
     {
         if (collision.gameObject.tag == "Olive")
         {
-            Debug.Log("INSIDE");
             isOliveInside = true;
 
             foreach (Action subscriber in entranceSubscriber)
