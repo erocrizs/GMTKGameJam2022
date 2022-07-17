@@ -17,6 +17,11 @@ public class SeasonButton : MonoBehaviour
             seasonManager = FindObjectOfType<SeasonManager>();
         }
 
+        if (!dieSeasonFace)
+        {
+            dieSeasonFace = FindObjectOfType<DieSeasonFace>();
+        }
+
         previousSeason = seasonManager.season;
     }
 
@@ -26,7 +31,6 @@ public class SeasonButton : MonoBehaviour
         {
             if (previousSeason != dieSeasonFace.dieSeason)
             {
-                Debug.Log("Change season to " + dieSeasonFace.dieSeason);
                 seasonManager.season = dieSeasonFace.dieSeason;
             }
             previousSeason = dieSeasonFace.dieSeason;
