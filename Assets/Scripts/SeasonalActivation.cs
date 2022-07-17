@@ -65,7 +65,6 @@ public class SeasonalActivation : MonoBehaviour
                 continue;
             }
             seasonObject.SetActive(true);
-            Debug.Log("Activate " + seasonObject.name);
         }
         foreach (var seasonObject in toDeactivate)
         {
@@ -74,7 +73,6 @@ public class SeasonalActivation : MonoBehaviour
                 continue;
             }
             seasonObject.SetActive(false);
-            Debug.Log("Deactivate " + seasonObject.name);
         }
     }
 }
