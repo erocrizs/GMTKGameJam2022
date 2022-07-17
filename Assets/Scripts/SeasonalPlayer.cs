@@ -12,7 +12,7 @@ public class SeasonalPlayer : MonoBehaviour
     public AudioSource autumnMusic;
     public AudioSource winterMusic;
 
-    private Dictionary<Season, AudioSource> seasonObjectMapping;
+    private Dictionary<Season, AudioSource> seasonMusicMapping;
     private Season currentSeason;
 
     [SerializeField]
@@ -23,11 +23,11 @@ public class SeasonalPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        seasonObjectMapping = new Dictionary<Season, AudioSource>();
-        seasonObjectMapping.Add(Season.Spring, springMusic);
-        seasonObjectMapping.Add(Season.Summer, summerMusic);
-        seasonObjectMapping.Add(Season.Autumn, autumnMusic);
-        seasonObjectMapping.Add(Season.Winter, winterMusic);
+        seasonMusicMapping = new Dictionary<Season, AudioSource>();
+        seasonMusicMapping.Add(Season.Spring, springMusic);
+        seasonMusicMapping.Add(Season.Summer, summerMusic);
+        seasonMusicMapping.Add(Season.Autumn, autumnMusic);
+        seasonMusicMapping.Add(Season.Winter, winterMusic);
 
         if (!seasonManager)
         {
@@ -40,10 +40,6 @@ public class SeasonalPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!seasonManager)
-        {
-            seasonManager = FindObjectOfType<SeasonManager>();
-        }
         if (currentSeason != seasonManager.season)
         {
             changeSeason(seasonManager.season);
@@ -55,34 +51,16 @@ public class SeasonalPlayer : MonoBehaviour
         StopAllCoroutines();
 
         currentSeason = newSeason;
-        HashSet<AudioSource> toActivate = new HashSet<AudioSource>();
-        HashSet<AudioSource> toDeactivate = new HashSet<AudioSource>();
 
-        foreach (var item in seasonObjectMapping)
+        foreach (var item in seasonMusicMapping)
         {
             if (item.Key == currentSeason)
             {
-                toActivate.Add(item.Value);
+                StartCoroutine(Play(item.Value));
             }
             else
             {
-                toDeactivate.Add(item.Value);
-            }
-        }
-
-        toDeactivate.ExceptWith(toActivate);
-        foreach (var seasonMusic in toActivate)
-        {
-            if (seasonMusic)
-            {
-                StartCoroutine(Play(seasonMusic));
-            }
-        }
-        foreach (var seasonMusic in toDeactivate)
-        {
-            if (seasonMusic)
-            {
-                StartCoroutine(Silence(seasonMusic));
+                StartCoroutine(Silence(item.Value));
             }
         }
     }
