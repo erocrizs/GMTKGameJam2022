@@ -22,7 +22,7 @@ public class DieDetector : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Die"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Die") || collision.gameObject.layer == LayerMask.NameToLayer("DieMoving"))
         {
             isDieInside = true;
 
@@ -42,7 +42,7 @@ public class DieDetector : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Die"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Die") || collision.gameObject.layer == LayerMask.NameToLayer("DieMoving"))
         {
             isDieInside = false;
 
