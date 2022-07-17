@@ -66,12 +66,10 @@ public class SeasonalActivation : MonoBehaviour
         foreach (var seasonObject in toActivate)
         {
             seasonObject.SetActive(true);
-            Debug.Log("Activate " + seasonObject.name);
         }
         foreach (var seasonObject in toDeactivate)
         {
             seasonObject.SetActive(false);
-            Debug.Log("Deactivate " + seasonObject.name);
         }
     }
 }

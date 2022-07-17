@@ -40,8 +40,6 @@ public class SeasonalGroundTile : MonoBehaviour
                 break;
         }
 
-        Debug.Log("Setting sprite of " + name + " with (" + season + " , " + index + ") into " + sr.sprite.name);
-
-        // Destroy(this);
+        Destroy(this);
     }
 }
