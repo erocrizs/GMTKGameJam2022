@@ -19,7 +19,7 @@ public class OliveMovement : MonoBehaviour
     bool IsRising => rb.velocity.y > 0;
     bool IsFalling => rb.velocity.y < 0;
     bool IsRunning => rb.velocity.x != 0;
-    string[] groundLayers = { "Ground", "Die", "OliveGround" };
+    string[] groundLayers = { "Ground", "Die", "OliveGround",  "MuddyPole" };
     bool IsGrounded {
         get {
             if (Physics2D.Raycast(transform.position, Vector2.down, 0.01f, LayerMask.GetMask(groundLayers)))

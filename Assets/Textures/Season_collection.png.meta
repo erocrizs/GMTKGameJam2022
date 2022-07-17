@@ -469,7 +469,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Season_collection_19
+      name: MuddyPole
       rect:
         serializedVersion: 2
         x: 528
@@ -3248,6 +3248,7 @@ TextureImporter:
       Season_collection_142: -1666011743
       Season_collection_94: -1193213052
       Season_collection_131: 154244371
+      MuddyPole: -468128415
       Season_collection_133: 930730921
       Season_collection_68: -1821808048
       Season_collection_60: -1057458881
@@ -3261,7 +3262,6 @@ TextureImporter:
       DryPlatform: -1975267002
       Season_collection_97: 794853326
       Season_collection_109: -1307084328
-      Season_collection_19: -468128415
       Season_collection_11: 1426463402
       Season_collection_36: 1076467273
       Season_collection_84: -742551796
