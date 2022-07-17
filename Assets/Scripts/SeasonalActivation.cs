@@ -48,6 +48,11 @@ public class SeasonalActivation : MonoBehaviour
         
         foreach (var item in seasonObjectMapping)
         {
+            if (item.Value == null)
+            {
+                continue;
+            }
+
             if (item.Key == currentSeason)
             {
                 toActivate.Add(item.Value);
@@ -60,18 +65,10 @@ public class SeasonalActivation : MonoBehaviour
         toDeactivate.ExceptWith(toActivate);
         foreach (var seasonObject in toActivate)
         {
-            if (seasonObject == null)
-            {
-                continue;
-            }
             seasonObject.SetActive(true);
         }
         foreach (var seasonObject in toDeactivate)
         {
-            if (seasonObject == null)
-            {
-                continue;
-            }
             seasonObject.SetActive(false);
         }
     }
