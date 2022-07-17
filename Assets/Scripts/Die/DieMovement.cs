@@ -11,12 +11,20 @@ public class DieMovement : MonoBehaviour
     [SerializeField]
     float verticalRollTime;
 
+    [SerializeField]
+    GameObject olive;
+
     bool isMoving = false;
     float moveLerp = 1;
     float moveDirection = 0;
     Vector2 preMovementPosition;
     Rigidbody2D rb;
-    Action Roll;
+    OliveDetector oliveDetector;
+    Action Move;
+    Collider2D oliveCollider;
+    Collider2D dieCollider;
+
+    bool IsGrounded => Physics2D.Raycast(transform.position, Vector2.down, 0.6f, 1 << LayerMask.NameToLayer("Ground"));
 
     private Vector2 RoundVector (Vector2 v)
     {
@@ -38,7 +46,10 @@ public class DieMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Roll = RollHorizontal;
+        oliveDetector = GetComponentInChildren<OliveDetector>();
+        Move = RollHorizontal;
+        oliveCollider = olive.GetComponent<BoxCollider2D>();
+        dieCollider = GetComponent<BoxCollider2D>();
         Physics2D.IgnoreLayerCollision(0, LayerMask.NameToLayer("OliveGround"));
     }
 
@@ -47,10 +58,9 @@ public class DieMovement : MonoBehaviour
     {
         if (!isMoving)
         {
-            bool isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 0.6f, 1 << LayerMask.NameToLayer("Ground"));
-            float movement = Input.GetAxis("Horizontal");
+            float movement = Input.GetAxis("Horizontal Die");
             isMoving = movement >= 0.01 || movement <= -0.01;
-            if (isMoving && isGrounded)
+            if (isMoving && IsGrounded)
             {
                 bool isFacingWall = Physics2D.Raycast(transform.position, Vector2.right * Mathf.Sign(movement), 0.6f, 1 << LayerMask.NameToLayer("Ground"));
 
@@ -73,7 +83,7 @@ public class DieMovement : MonoBehaviour
     {
         if (isMoving)
         {
-            Roll();
+            Move();
         }
         else
         {
@@ -93,11 +103,9 @@ public class DieMovement : MonoBehaviour
 
         if (moveLerp == 1)
         {
-            bool isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 0.6f, 1 << LayerMask.NameToLayer("Ground"));
-
-            if (isGrounded)
+            if (IsGrounded)
             {
-                RollStop();
+                MoveStop();
             }
             else
             {
@@ -158,16 +166,43 @@ public class DieMovement : MonoBehaviour
 
         if (moveLerp == 1)
         {
-            RollStop();
+            if (IsGrounded)
+            {
+                MoveStop();
+            }
+            else
+            {
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                rb.isKinematic = false;
+                Move = Fall;
+            }
         }
     }
 
-    void RollStop ()
+    void Fall ()
+    {
+        if (IsGrounded)
+        {
+            rb.isKinematic = true;
+            MoveStop();
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+    }
+
+    void MoveStop ()
     {
         isMoving = false;
         moveDirection = 0;
-        rb.isKinematic = false;
-        rb.simulated = true;
+        
+        if (oliveDetector.IsOliveInside)
+        {
+            oliveDetector.SubscribeExitOnce(() => IgnoreOliveCollision(false));
+        }
+        else
+        {
+            IgnoreOliveCollision(false);
+        }
+
         rb.position = RoundVector(rb.position);
     }
 
@@ -175,15 +210,20 @@ public class DieMovement : MonoBehaviour
     {
         moveLerp = 0;
         preMovementPosition = RoundVector(rb.position);
-        Roll = NextRoll;
+        Move = NextRoll;
     }
 
     void RollStart (float direction, Action NextRoll)
     {
         isMoving = true;
+        IgnoreOliveCollision(true);
         moveDirection = direction;
-        rb.isKinematic = true;
-        rb.simulated = false;
         ResetRoll(NextRoll);
+    }
+
+    void IgnoreOliveCollision (bool ignore)
+    {
+        Physics2D.IgnoreCollision(oliveCollider, dieCollider, ignore);
+        this.gameObject.layer = ignore ? 0 : LayerMask.NameToLayer("Die");
     }
 }
