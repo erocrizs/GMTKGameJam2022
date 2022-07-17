@@ -40,6 +40,10 @@ public class SeasonalPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!seasonManager)
+        {
+            seasonManager = FindObjectOfType<SeasonManager>();
+        }
         if (currentSeason != seasonManager.season)
         {
             changeSeason(seasonManager.season);
