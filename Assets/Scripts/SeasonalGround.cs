@@ -14,6 +14,6 @@ public class SeasonalGround : MonoBehaviour
             child.SetSprite(index);
         }
 
-       // Destroy(this);
+       Destroy(this);
     }
 }
