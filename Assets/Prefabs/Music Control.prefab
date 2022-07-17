@@ -578,4 +578,5 @@ MonoBehaviour:
   summerMusic: {fileID: 2932035248577367566}
   autumnMusic: {fileID: 4163262372614407672}
   winterMusic: {fileID: 6950531845916708943}
-  switchTime: 1
+  switchTime: 3
+  maxVolume: 0.5
