@@ -8,7 +8,6 @@ public class DieSeasonFace : MonoBehaviour
     public void Update()
     {
         float zRotation = gameObject.transform.rotation.eulerAngles.z;
-        Debug.Log(zRotation);
         float tolerance = 0.001f;
 
         if (Mathf.Abs(zRotation - 0) < tolerance)

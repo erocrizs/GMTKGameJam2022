@@ -9,12 +9,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Die
+  - 
   - Water
   - UI
   - Ground
   - OliveGround
-  - 
+  - Die
   - 
   - 
   - 
@@ -42,12 +42,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Ground
-    uniqueID: 734908331
-    locked: 0
-  - name: Die
-    uniqueID: 2181707863
-    locked: 0
-  - name: Olive
-    uniqueID: 3050309989
+  - name: Front
+    uniqueID: 3984704867
     locked: 0
