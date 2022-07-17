@@ -12,6 +12,9 @@ public class DieMovement : MonoBehaviour
     float verticalRollTime;
 
     [SerializeField]
+    float maxFallSpeed;
+
+    [SerializeField]
     GameObject olive;
 
     bool isMoving = false;
@@ -50,7 +53,8 @@ public class DieMovement : MonoBehaviour
         Move = RollHorizontal;
         oliveCollider = olive.GetComponent<BoxCollider2D>();
         dieCollider = GetComponent<BoxCollider2D>();
-        Physics2D.IgnoreLayerCollision(0, LayerMask.NameToLayer("OliveGround"));
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Die"), LayerMask.NameToLayer("OliveGround"));
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("DieMoving"), LayerMask.NameToLayer("OliveGround"));
     }
 
     // Update is called once per frame
@@ -186,7 +190,10 @@ public class DieMovement : MonoBehaviour
             rb.isKinematic = true;
             MoveStop();
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            return;
         }
+
+        rb.velocity = new Vector2(0, Mathf.Max(rb.velocity.y, -maxFallSpeed));
     }
 
     void MoveStop ()
@@ -224,6 +231,6 @@ public class DieMovement : MonoBehaviour
     void IgnoreOliveCollision (bool ignore)
     {
         Physics2D.IgnoreCollision(oliveCollider, dieCollider, ignore);
-        this.gameObject.layer = ignore ? 0 : LayerMask.NameToLayer("Die");
+        this.gameObject.layer = ignore ? LayerMask.NameToLayer("DieMoving") : LayerMask.NameToLayer("Die");
     }
 }
