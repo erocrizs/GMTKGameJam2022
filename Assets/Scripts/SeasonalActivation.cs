@@ -23,7 +23,11 @@ public class SeasonalActivation : MonoBehaviour
         seasonObjectMapping.Add(Season.Autumn, autumnObject);
         seasonObjectMapping.Add(Season.Winter, winterObject);
 
-        currentSeason = seasonManager.season;
+        if (!seasonManager)
+        {
+            seasonManager = FindObjectOfType<SeasonManager>();
+        }
+        
         changeSeason(seasonManager.season);
     }
 
@@ -61,6 +65,7 @@ public class SeasonalActivation : MonoBehaviour
                 continue;
             }
             seasonObject.SetActive(true);
+            Debug.Log("Activate " + seasonObject.name);
         }
         foreach (var seasonObject in toDeactivate)
         {
@@ -69,6 +74,7 @@ public class SeasonalActivation : MonoBehaviour
                 continue;
             }
             seasonObject.SetActive(false);
+            Debug.Log("Deactivate " + seasonObject.name);
         }
     }
 }
