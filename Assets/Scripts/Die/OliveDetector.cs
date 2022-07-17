@@ -8,12 +8,14 @@ public class OliveDetector : MonoBehaviour
     bool isOliveInside;
     public bool IsOliveInside => isOliveInside;
     List<Action> entranceSubscriber;
+    List<Action> entranceSubscriberOnce;
     List<Action> exitSubscriber;
     List<Action> exitSubscriberOnce;
 
     void Awake ()
     {
         entranceSubscriber = new List<Action>();
+        entranceSubscriberOnce = new List<Action>();
         exitSubscriber = new List<Action>();
         exitSubscriberOnce = new List<Action>();
     }
@@ -23,6 +25,13 @@ public class OliveDetector : MonoBehaviour
         if (collision.gameObject.tag == "Olive")
         {
             isOliveInside = true;
+
+            foreach (Action subscriber in entranceSubscriberOnce)
+            {
+                subscriber();
+            }
+
+            entranceSubscriberOnce.Clear();
 
             foreach (Action subscriber in entranceSubscriber)
             {
@@ -59,6 +68,11 @@ public class OliveDetector : MonoBehaviour
     public void SubscribeExit(Action subscriber)
     {
         exitSubscriber.Add(subscriber);
+    }
+
+    public void SubscribeEntranceOnce(Action subscriber)
+    {
+        entranceSubscriberOnce.Add(subscriber);
     }
 
     public void SubscribeExitOnce (Action subscriber)
