@@ -27,7 +27,7 @@ public class SeasonButton : MonoBehaviour
 
     private void Update()
     {
-        if (Physics2D.Raycast(transform.position, Vector2.up, 0.01f, LayerMask.GetMask("Die")))
+        if (Physics2D.Raycast(transform.position, Vector2.up, 0.01f, LayerMask.GetMask("Die", "DieMoving")))
         {
             if (previousSeason != dieSeasonFace.dieSeason)
             {
