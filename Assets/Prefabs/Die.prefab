@@ -220,4 +220,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalRollTime: 0.5
   verticalRollTime: 0.2
+  maxFallSpeed: 7
   olive: {fileID: 0}

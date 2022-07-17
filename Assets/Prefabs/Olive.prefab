@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runSpeed: 5
   burstJumpSpeed: 10
-  maxFallSpeed: 5
+  maxFallSpeed: 7
 --- !u!1 &5627422541455312328
 GameObject:
   m_ObjectHideFlags: 0
