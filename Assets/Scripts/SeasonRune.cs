@@ -17,6 +17,11 @@ public class SeasonRune : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!seasonManager)
+        {
+            seasonManager = FindObjectOfType<SeasonManager>();
+        }
+
         seasonRuneMapping = new Dictionary<Season, GameObject>();
         seasonRuneMapping.Add(Season.Spring, springRune);
         seasonRuneMapping.Add(Season.Summer, summerRune);
