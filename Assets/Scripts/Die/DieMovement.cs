@@ -66,9 +66,14 @@ public class DieMovement : MonoBehaviour
             isMoving = movement >= 0.01 || movement <= -0.01;
             if (isMoving && IsGrounded)
             {
+                bool isFacingMudPole = Physics2D.Raycast(transform.position, Vector2.right * Mathf.Sign(movement), 1f, 1 << LayerMask.NameToLayer("MuddyPole"));
                 bool isFacingWall = Physics2D.Raycast(transform.position, Vector2.right * Mathf.Sign(movement), 0.6f, 1 << LayerMask.NameToLayer("Ground"));
 
-                if (isFacingWall)
+                if (isFacingMudPole)
+                {
+                    RollStart(movement, RollRotate);
+                }
+                else if (isFacingWall)
                 {
                     RollStart(movement, RollUp);
                 }
@@ -153,6 +158,32 @@ public class DieMovement : MonoBehaviour
             else
             {
                 ResetRoll(RollHorizontalFromUp);
+            }
+        }
+    }
+
+    void RollRotate ()
+    {
+        float progress = Mathf.Min(Time.fixedDeltaTime / horizontalRollTime, 1 - moveLerp);
+        moveLerp += progress;
+        float degree = moveLerp * 90;
+        float rotationalDirection = -1 * Mathf.Sign(moveDirection);
+        Vector2 corner = new Vector2(Mathf.Sign(moveDirection) * 0.5f, -0.5f);
+
+        Vector2 newPosition = LerpPosition(degree, rotationalDirection, corner);
+        newPosition.x = preMovementPosition.x;
+        transform.position = newPosition;
+        transform.Rotate(0, 0, progress * -90 * Mathf.Sign(moveDirection));
+
+        if (moveLerp == 1)
+        {
+            if (IsGrounded)
+            {
+                MoveStop();
+            }
+            else
+            {
+                ResetRoll(RollDown);
             }
         }
     }

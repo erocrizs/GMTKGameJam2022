@@ -20,6 +20,7 @@ public class SeasonButton : MonoBehaviour
         if (collision.gameObject == dieSeasonFace.gameObject)
         {
             previousSeason = dieSeasonFace.dieSeason;
+
         }
     }
 
@@ -28,6 +29,7 @@ public class SeasonButton : MonoBehaviour
         if (collision.gameObject == dieSeasonFace.gameObject && previousSeason != dieSeasonFace.dieSeason)
         {
             seasonManager.season = dieSeasonFace.dieSeason;
+            previousSeason = dieSeasonFace.dieSeason;
         }
     }
 
@@ -36,6 +38,7 @@ public class SeasonButton : MonoBehaviour
         if (collision.gameObject == dieSeasonFace.gameObject && previousSeason != dieSeasonFace.dieSeason)
         {
             seasonManager.season = dieSeasonFace.dieSeason;
+            previousSeason = dieSeasonFace.dieSeason;
         }
     }
 }
