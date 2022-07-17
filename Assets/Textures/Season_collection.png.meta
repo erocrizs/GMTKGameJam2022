@@ -619,9 +619,9 @@ TextureImporter:
       name: GrassyPlatform
       rect:
         serializedVersion: 2
-        x: 123
+        x: 127
         y: 792
-        width: 105
+        width: 98
         height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

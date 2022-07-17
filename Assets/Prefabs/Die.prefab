@@ -84,6 +84,7 @@ GameObject:
   - component: {fileID: 5194054560024152984}
   - component: {fileID: 5194054560024152985}
   - component: {fileID: 5194054560024152986}
+  - component: {fileID: 5664705208329278246}
   m_Layer: 3
   m_Name: Die
   m_TagString: Untagged
@@ -145,7 +146,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2113259433
+  m_SortingLayerID: -1020088359
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 264475a357487c44ab8a17764c63d608, type: 3}
@@ -222,3 +223,16 @@ MonoBehaviour:
   verticalRollTime: 0.2
   maxFallSpeed: 7
   olive: {fileID: 0}
+--- !u!114 &5664705208329278246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5194054560024152987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1961fc370378b04590334b7955400d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dieSeason: 0
