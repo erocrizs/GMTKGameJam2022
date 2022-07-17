@@ -39,6 +39,7 @@ public class DieMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         Roll = RollHorizontal;
+        Physics2D.IgnoreLayerCollision(0, LayerMask.NameToLayer("OliveGround"));
     }
 
     // Update is called once per frame
