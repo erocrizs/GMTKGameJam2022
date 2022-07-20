@@ -5,19 +5,22 @@ using UnityEngine;
 
 public class SeasonalPlayer : MonoBehaviour
 {
-    public AudioSource springMusic;
-    public AudioSource summerMusic;
-    public AudioSource autumnMusic;
-    public AudioSource winterMusic;
-
-    private Dictionary<Season, AudioSource> seasonMusicMapping;
-    private Season currentSeason;
-
+    [SerializeField]
+    private AudioSource springMusic;
+    [SerializeField]
+    private AudioSource summerMusic;
+    [SerializeField]
+    private AudioSource autumnMusic;
+    [SerializeField]
+    private AudioSource winterMusic;
     [SerializeField]
     float switchTime;
-
     [SerializeField]
     float maxVolume;
+
+
+    private Dictionary<Season, AudioSource> seasonMusicMapping;
+    private SeasonManager seasonManager;
 
     const float MUSIC_STEP = 10;
     float CoroutineDelay => switchTime / MUSIC_STEP;
@@ -31,29 +34,18 @@ public class SeasonalPlayer : MonoBehaviour
         seasonMusicMapping.Add(Season.Autumn, autumnMusic);
         seasonMusicMapping.Add(Season.Winter, winterMusic);
 
-        SeasonManager seasonManager = FindObjectOfType<SeasonManager>();
-        changeSeason(seasonManager.season);
+        seasonManager = FindObjectOfType<SeasonManager>();
+        seasonManager.Subscribe(ChangeBGMusic);
+        ChangeBGMusic();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        SeasonManager seasonManager = FindObjectOfType<SeasonManager>();
-        if (currentSeason != seasonManager.season)
-        {
-            changeSeason(seasonManager.season);
-        }
-    }
-
-    private void changeSeason(Season newSeason)
+    private void ChangeBGMusic()
     {
         StopAllCoroutines();
 
-        currentSeason = newSeason;
-
         foreach (var item in seasonMusicMapping)
         {
-            if (item.Key == currentSeason)
+            if (item.Key == seasonManager.season)
             {
                 StartCoroutine(Play(item.Value));
             }
@@ -77,7 +69,7 @@ public class SeasonalPlayer : MonoBehaviour
                 break;
             }
 
-            yield return new WaitForSeconds(CoroutineDelay);
+            yield return new WaitForSecondsRealtime(CoroutineDelay);
         }
     }
 
@@ -94,7 +86,7 @@ public class SeasonalPlayer : MonoBehaviour
                 break;
             }
 
-            yield return new WaitForSeconds(CoroutineDelay);
+            yield return new WaitForSecondsRealtime(CoroutineDelay);
         }
     }
 }

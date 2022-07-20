@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class SeasonalActivation : MonoBehaviour
 {
-    public SeasonManager seasonManager;
+    [SerializeField]
+    private GameObject springObject;
+    [SerializeField]
+    private GameObject summerObject;
+    [SerializeField]
+    private GameObject autumnObject;
+    [SerializeField]
+    private GameObject winterObject;
 
-    public GameObject springObject;
-    public GameObject summerObject;
-    public GameObject autumnObject;
-    public GameObject winterObject;
-
+    private SeasonManager seasonManager;
     private Dictionary<Season, GameObject> seasonObjectMapping;
-    private Season currentSeason;
 
     // Start is called before the first frame update
     void Start()
@@ -23,26 +25,13 @@ public class SeasonalActivation : MonoBehaviour
         seasonObjectMapping.Add(Season.Autumn, autumnObject);
         seasonObjectMapping.Add(Season.Winter, winterObject);
 
-        if (!seasonManager)
-        {
-            seasonManager = FindObjectOfType<SeasonManager>();
-        }
-        
-        changeSeason(seasonManager.season);
+        seasonManager = FindObjectOfType<SeasonManager>();
+        seasonManager.Subscribe(ChangeState);
+        ChangeState();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ChangeState ()
     {
-        if (currentSeason != seasonManager.season)
-        {
-            changeSeason(seasonManager.season);
-        }
-    }
-
-    private void changeSeason(Season newSeason)
-    {
-        currentSeason = newSeason;
         HashSet<GameObject> toActivate = new HashSet<GameObject>();
         HashSet<GameObject> toDeactivate = new HashSet<GameObject>();
         
@@ -53,7 +42,7 @@ public class SeasonalActivation : MonoBehaviour
                 continue;
             }
 
-            if (item.Key == currentSeason)
+            if (item.Key == seasonManager.season)
             {
                 toActivate.Add(item.Value);
             } else

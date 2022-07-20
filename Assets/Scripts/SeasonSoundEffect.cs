@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class SeasonSoundEffect : MonoBehaviour
 {
-
-    public AudioClip springAudio;
-    public AudioClip summerAudio;
-    public AudioClip autumnAudio;
-    public AudioClip winterAudio;
+    [SerializeField]
+    private AudioClip springAudio;
+    [SerializeField]
+    private AudioClip summerAudio;
+    [SerializeField]
+    private AudioClip autumnAudio;
+    [SerializeField]
+    private AudioClip winterAudio;
 
     private Dictionary<Season, AudioClip> seasonAudioMapping;
-    private Season currentSeason;
     private SeasonManager seasonManager;
     private AudioSource audioSource;
 
@@ -25,20 +27,8 @@ public class SeasonSoundEffect : MonoBehaviour
         seasonAudioMapping.Add(Season.Winter, winterAudio);
         seasonManager = GetComponent<SeasonManager>();
         audioSource = GetComponent<AudioSource>();
+        seasonManager.Subscribe(PlaySFX);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (currentSeason != seasonManager.season)
-        {
-            changeSeason(seasonManager.season);
-        }
-    }
-
-    private void changeSeason(Season newSeason)
-    {
-        currentSeason = newSeason;
-        audioSource.PlayOneShot(seasonAudioMapping[newSeason]);
-    }
+    private void PlaySFX () => audioSource.PlayOneShot(seasonAudioMapping[seasonManager.season]);
 }
