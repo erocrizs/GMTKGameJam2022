@@ -5,30 +5,29 @@ using UnityEngine;
 public class SeasonSoundEffect : MonoBehaviour
 {
     [SerializeField]
-    private AudioClip springAudio;
+    AudioClip springAudio;
     [SerializeField]
-    private AudioClip summerAudio;
+    AudioClip summerAudio;
     [SerializeField]
-    private AudioClip autumnAudio;
+    AudioClip autumnAudio;
     [SerializeField]
-    private AudioClip winterAudio;
-
-    private Dictionary<Season, AudioClip> seasonAudioMapping;
-    private SeasonManager seasonManager;
-    private AudioSource audioSource;
+    AudioClip winterAudio;
+    Dictionary<Season, AudioClip> seasonAudioMapping;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-        seasonAudioMapping = new Dictionary<Season, AudioClip>();
-        seasonAudioMapping.Add(Season.Spring, springAudio);
-        seasonAudioMapping.Add(Season.Summer, summerAudio);
-        seasonAudioMapping.Add(Season.Autumn, autumnAudio);
-        seasonAudioMapping.Add(Season.Winter, winterAudio);
-        seasonManager = GetComponent<SeasonManager>();
+        seasonAudioMapping = new Dictionary<Season, AudioClip>
+        {
+            { Season.Spring, springAudio },
+            { Season.Summer, summerAudio },
+            { Season.Autumn, autumnAudio },
+            { Season.Winter, winterAudio }
+        };
         audioSource = GetComponent<AudioSource>();
-        seasonManager.Subscribe(PlaySFX);
+        new SeasonObserver().SubscribeToSeason(PlaySFX, false);
     }
 
-    private void PlaySFX () => audioSource.PlayOneShot(seasonAudioMapping[seasonManager.season]);
+    private void PlaySFX (Season season) => audioSource.PlayOneShot(seasonAudioMapping[season]);
 }

@@ -6,21 +6,18 @@ using UnityEngine;
 public class SeasonalPlayer : MonoBehaviour
 {
     [SerializeField]
-    private AudioSource springMusic;
+    AudioSource springMusic;
     [SerializeField]
-    private AudioSource summerMusic;
+    AudioSource summerMusic;
     [SerializeField]
-    private AudioSource autumnMusic;
+    AudioSource autumnMusic;
     [SerializeField]
-    private AudioSource winterMusic;
+    AudioSource winterMusic;
     [SerializeField]
     float switchTime;
     [SerializeField]
     float maxVolume;
-
-
-    private Dictionary<Season, AudioSource> seasonMusicMapping;
-    private SeasonManager seasonManager;
+    Dictionary<Season, AudioSource> seasonMusicMapping;
 
     const float MUSIC_STEP = 10;
     float CoroutineDelay => switchTime / MUSIC_STEP;
@@ -28,24 +25,24 @@ public class SeasonalPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        seasonMusicMapping = new Dictionary<Season, AudioSource>();
-        seasonMusicMapping.Add(Season.Spring, springMusic);
-        seasonMusicMapping.Add(Season.Summer, summerMusic);
-        seasonMusicMapping.Add(Season.Autumn, autumnMusic);
-        seasonMusicMapping.Add(Season.Winter, winterMusic);
+        seasonMusicMapping = new Dictionary<Season, AudioSource>
+        {
+            { Season.Spring, springMusic },
+            { Season.Summer, summerMusic },
+            { Season.Autumn, autumnMusic },
+            { Season.Winter, winterMusic }
+        };
 
-        seasonManager = FindObjectOfType<SeasonManager>();
-        seasonManager.Subscribe(ChangeBGMusic);
-        ChangeBGMusic();
+        new SeasonObserver().SubscribeToSeason(ChangeBGMusic, true);
     }
 
-    private void ChangeBGMusic()
+    private void ChangeBGMusic(Season season)
     {
         StopAllCoroutines();
 
         foreach (var item in seasonMusicMapping)
         {
-            if (item.Key == seasonManager.season)
+            if (item.Key == season)
             {
                 StartCoroutine(Play(item.Value));
             }
