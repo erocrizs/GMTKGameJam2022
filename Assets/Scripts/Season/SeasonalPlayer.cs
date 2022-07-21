@@ -33,7 +33,7 @@ public class SeasonalPlayer : MonoBehaviour
             { Season.Winter, winterMusic }
         };
 
-        new SeasonObserver().SubscribeToSeason(ChangeBGMusic, true);
+        SeasonManager.SubscribeToSeason(ChangeBGMusic, true);
     }
 
     private void ChangeBGMusic(Season season)

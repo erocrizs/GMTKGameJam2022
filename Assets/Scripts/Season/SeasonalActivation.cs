@@ -10,7 +10,7 @@ public class SeasonalActivation : MonoBehaviour
     void Start()
     {
         children = GetComponentsInChildren<SeasonalActivationChild>(true);
-        new SeasonObserver().SubscribeToSeason(ActivateChildren, true);
+        SeasonManager.SubscribeToSeason(ActivateChildren, true);
     }
 
     void ActivateChildren (Season season)

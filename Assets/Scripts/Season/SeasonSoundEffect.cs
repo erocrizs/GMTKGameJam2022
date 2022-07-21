@@ -26,7 +26,7 @@ public class SeasonSoundEffect : MonoBehaviour
             { Season.Winter, winterAudio }
         };
         audioSource = GetComponent<AudioSource>();
-        new SeasonObserver().SubscribeToSeason(PlaySFX, false);
+        SeasonManager.SubscribeToSeason(PlaySFX, false);
     }
 
     private void PlaySFX (Season season) => audioSource.PlayOneShot(seasonAudioMapping[season]);

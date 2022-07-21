@@ -10,7 +10,7 @@ public class SeasonalActivationChild : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        new SeasonObserver().SubscribeToSeason(ChangeState, true);
+        SeasonManager.SubscribeToSeason(ChangeState, true);
     }
 
     public void ChangeState(Season season)

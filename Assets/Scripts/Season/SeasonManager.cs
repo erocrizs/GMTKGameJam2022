@@ -11,6 +11,18 @@ public enum Season
 
 public class SeasonManager : MonoBehaviour
 {
+    private static SeasonManager main;
+    private static SeasonManager Main
+    {
+        get {
+            if (main == null || !main.isActiveAndEnabled)
+            {
+                main = FindObjectOfType<SeasonManager>();
+            }
+            return main;
+        }
+    }
+
     public Season season = Season.Spring;
     private Season lastSeason;
 
@@ -23,7 +35,8 @@ public class SeasonManager : MonoBehaviour
 
     private void Update()
     {
-        if (lastSeason != season) {
+        if (lastSeason != season)
+        {
             lastSeason = season;
             onSeasonChange.Play();
         }
@@ -31,4 +44,15 @@ public class SeasonManager : MonoBehaviour
 
     public void Subscribe(Action listener) => onSeasonChange.Subscribe(listener);
     public void Unsubscribe(Action listener) => onSeasonChange.Unsubscribe(listener);
+
+    public static void SubscribeToSeason(Action<Season> listener, bool runImmediately)
+    {
+        void seasonListener() => listener(Main.season);
+        Main.Subscribe(seasonListener);
+
+        if (runImmediately)
+        {
+            seasonListener();
+        }
+    }
 }
