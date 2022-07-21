@@ -236,3 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dieSeason: 0
+  topSeason: 0
+  rightSeason: 1
+  bottomSeason: 2
+  leftSeason: 3
