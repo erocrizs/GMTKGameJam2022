@@ -24,9 +24,9 @@ public class OliveMovement : MonoBehaviour
     Rigidbody2D rb;
     OliveAnimator animator;
 
-    bool IsRising => rb.velocity.y > 0;
-    bool IsFalling => rb.velocity.y < 0;
-    bool IsRunning => rb.velocity.x != 0;
+    bool IsRising => rb.velocity.y > 0.1;
+    bool IsFalling => rb.velocity.y < -0.1;
+    bool IsRunning => rb.velocity.x != 0 || movement != 0;
     string[] groundLayers = { "Ground", "Die", "OliveGround",  "MuddyPole" };
     bool IsGrounded {
         get {
