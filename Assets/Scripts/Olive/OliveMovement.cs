@@ -89,8 +89,6 @@ public class OliveMovement : MonoBehaviour
         else {
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
-
-        velocity = rb.velocity.x;
     }
 
     void Jump ()
