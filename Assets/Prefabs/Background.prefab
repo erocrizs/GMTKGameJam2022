@@ -48,11 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b96d25872db57b44a5726eb8ed643a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seasonManager: {fileID: 0}
-  springObject: {fileID: 3416963670505818150}
-  summerObject: {fileID: 3416963669733115678}
-  autumnObject: {fileID: 3416963670766823992}
-  winterObject: {fileID: 3416963671253241692}
 --- !u!1 &3416963669733115678
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,6 +58,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3416963669733115679}
   - component: {fileID: 3416963669733115672}
+  - component: {fileID: 9205001183438457421}
   m_Layer: 0
   m_Name: SummerBackground
   m_TagString: Untagged
@@ -137,6 +133,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &9205001183438457421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3416963669733115678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bccef1b9d3d94364da5bfb9b7c19434e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeSeasons: 01000000
 --- !u!1 &3416963670505818150
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,6 +156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3416963670505818151}
   - component: {fileID: 3416963670505818144}
+  - component: {fileID: 9222926897506436008}
   m_Layer: 0
   m_Name: SpringBackground
   m_TagString: Untagged
@@ -221,6 +231,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &9222926897506436008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3416963670505818150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bccef1b9d3d94364da5bfb9b7c19434e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeSeasons: 00000000
 --- !u!1 &3416963670766823992
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,6 +254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3416963670766823993}
   - component: {fileID: 3416963670766823994}
+  - component: {fileID: 8227817135138209965}
   m_Layer: 0
   m_Name: FallBackground
   m_TagString: Untagged
@@ -305,6 +329,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8227817135138209965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3416963670766823992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bccef1b9d3d94364da5bfb9b7c19434e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeSeasons: 02000000
 --- !u!1 &3416963671253241692
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3416963671253241693}
   - component: {fileID: 3416963671253241694}
+  - component: {fileID: 953242416390195900}
   m_Layer: 0
   m_Name: WinterBackground
   m_TagString: Untagged
@@ -389,3 +427,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &953242416390195900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3416963671253241692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bccef1b9d3d94364da5bfb9b7c19434e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeSeasons: 03000000

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7824409411566254841}
   - component: {fileID: 7824409411566254790}
   - component: {fileID: 7824409411566254791}
+  - component: {fileID: 861896098871617519}
   m_Layer: 0
   m_Name: Winter Block
   m_TagString: Untagged
@@ -166,3 +167,16 @@ MonoBehaviour:
   - {fileID: 333254029, guid: 86a654e1d2ce6494c8e9c1b71ea53461, type: 3}
   - {fileID: 452385428, guid: 86a654e1d2ce6494c8e9c1b71ea53461, type: 3}
   - {fileID: 1983194717, guid: 86a654e1d2ce6494c8e9c1b71ea53461, type: 3}
+--- !u!114 &861896098871617519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7824409411566254788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bccef1b9d3d94364da5bfb9b7c19434e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeSeasons: 03000000
