@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,17 +7,11 @@ using UnityEngine;
 public class SeasonalPlayer : MonoBehaviour
 {
     [SerializeField]
-    AudioSource springMusic;
-    [SerializeField]
-    AudioSource summerMusic;
-    [SerializeField]
-    AudioSource autumnMusic;
-    [SerializeField]
-    AudioSource winterMusic;
-    [SerializeField]
     float switchTime;
     [SerializeField]
     float maxVolume;
+    [SerializeField]
+    SeasonalAudioClip[] audioClips;
     Dictionary<Season, AudioSource> seasonMusicMapping;
 
     const float MUSIC_STEP = 10;
@@ -25,13 +20,20 @@ public class SeasonalPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        seasonMusicMapping = new Dictionary<Season, AudioSource>
+        seasonMusicMapping = new Dictionary<Season, AudioSource>();
+        foreach (var pair in audioClips)
         {
-            { Season.Spring, springMusic },
-            { Season.Summer, summerMusic },
-            { Season.Autumn, autumnMusic },
-            { Season.Winter, winterMusic }
-        };
+            var childObject = new GameObject(pair.season.ToString());
+            childObject.transform.parent = transform;
+            var audioSource = childObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = true;
+            audioSource.loop = true;
+            audioSource.volume = 0f;
+            audioSource.spatialBlend = 0;
+            audioSource.clip = pair.audioClip;
+            audioSource.Play();
+            seasonMusicMapping[pair.season] = audioSource;
+        }
 
         SeasonManager.SubscribeToSeason(ChangeBGMusic, true);
     }
@@ -85,5 +87,12 @@ public class SeasonalPlayer : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(CoroutineDelay);
         }
+    }
+
+    [Serializable]
+    private struct SeasonalAudioClip
+    {
+        public Season season;
+        public AudioClip audioClip;
     }
 }
