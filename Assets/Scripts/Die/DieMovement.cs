@@ -26,6 +26,8 @@ public class DieMovement : MonoBehaviour
     Action Move;
     Collider2D oliveCollider;
     Collider2D dieCollider;
+    EventObservable onStop;
+    public EventObservable OnStop => onStop;
 
     bool IsGrounded => Physics2D.Raycast(transform.position, Vector2.down, 0.6f, 1 << LayerMask.NameToLayer("Ground"));
 
@@ -53,6 +55,7 @@ public class DieMovement : MonoBehaviour
         Move = RollHorizontal;
         oliveCollider = olive.GetComponent<BoxCollider2D>();
         dieCollider = GetComponent<BoxCollider2D>();
+        onStop = new EventObservable();
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Die"), LayerMask.NameToLayer("OliveGround"));
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("DieMoving"), LayerMask.NameToLayer("OliveGround"));
     }
@@ -119,6 +122,7 @@ public class DieMovement : MonoBehaviour
 
         if (moveLerp == 1)
         {
+            onStop.Play();
             if (IsGrounded)
             {
                 MoveStop();
@@ -184,6 +188,7 @@ public class DieMovement : MonoBehaviour
 
         if (moveLerp == 1)
         {
+            onStop.Play();
             if (IsGrounded)
             {
                 MoveStop();
@@ -208,6 +213,7 @@ public class DieMovement : MonoBehaviour
 
         if (moveLerp == 1)
         {
+            onStop.Play();
             if (IsGrounded)
             {
                 MoveStop();
@@ -225,6 +231,7 @@ public class DieMovement : MonoBehaviour
     {
         if (IsGrounded)
         {
+            onStop.Play();
             rb.isKinematic = true;
             MoveStop();
             rb.constraints = RigidbodyConstraints2D.FreezeAll;

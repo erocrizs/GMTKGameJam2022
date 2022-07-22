@@ -178,11 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b96d25872db57b44a5726eb8ed643a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seasonManager: {fileID: 0}
-  springObject: {fileID: 1937587643276112300}
-  summerObject: {fileID: 1937587643276112300}
-  autumnObject: {fileID: 1937587643276112300}
-  winterObject: {fileID: 1937587644389766952}
+  defaultActive: {fileID: 1937587643276112300}
 --- !u!1 &1937587644389766952
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +190,7 @@ GameObject:
   - component: {fileID: 1937587644389766934}
   - component: {fileID: 1937587644389766953}
   - component: {fileID: 3725489160648152835}
+  - component: {fileID: 5244553391798798628}
   m_Layer: 6
   m_Name: Ice
   m_TagString: Untagged
@@ -294,6 +291,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &5244553391798798628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937587644389766952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bccef1b9d3d94364da5bfb9b7c19434e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeSeasons: 03000000
 --- !u!1 &8486103305333761410
 GameObject:
   m_ObjectHideFlags: 0

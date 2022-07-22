@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,19 +6,14 @@ using UnityEngine;
 
 public class SeasonalPlayer : MonoBehaviour
 {
-    public AudioSource springMusic;
-    public AudioSource summerMusic;
-    public AudioSource autumnMusic;
-    public AudioSource winterMusic;
-
-    private Dictionary<Season, AudioSource> seasonMusicMapping;
-    private Season currentSeason;
-
     [SerializeField]
     float switchTime;
-
     [SerializeField]
     float maxVolume;
+    [SerializeField]
+    SeasonalAudioClip[] audioClips;
+    Dictionary<Season, AudioSource> seasonMusicMapping;
+    Season currentSeason;
 
     const float MUSIC_STEP = 10;
     float CoroutineDelay => switchTime / MUSIC_STEP;
@@ -25,35 +21,40 @@ public class SeasonalPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentSeason = SeasonManager.Main.season;
         seasonMusicMapping = new Dictionary<Season, AudioSource>();
-        seasonMusicMapping.Add(Season.Spring, springMusic);
-        seasonMusicMapping.Add(Season.Summer, summerMusic);
-        seasonMusicMapping.Add(Season.Autumn, autumnMusic);
-        seasonMusicMapping.Add(Season.Winter, winterMusic);
-
-        SeasonManager seasonManager = FindObjectOfType<SeasonManager>();
-        changeSeason(seasonManager.season);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        SeasonManager seasonManager = FindObjectOfType<SeasonManager>();
-        if (currentSeason != seasonManager.season)
+        foreach (var pair in audioClips)
         {
-            changeSeason(seasonManager.season);
+            var childObject = new GameObject(pair.season.ToString());
+            childObject.transform.parent = transform;
+            var audioSource = childObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = true;
+            audioSource.loop = true;
+            audioSource.volume = (currentSeason == pair.season) ? 1f : 0f;
+            audioSource.spatialBlend = 0;
+            audioSource.clip = pair.audioClip;
+            audioSource.Play();
+            seasonMusicMapping[pair.season] = audioSource;
         }
     }
 
-    private void changeSeason(Season newSeason)
+    void Update()
+    {
+        var currentSeason = SeasonManager.Main.season;
+        if (this.currentSeason != currentSeason)
+        {
+            this.currentSeason = currentSeason;
+            ChangeBGMusic(this.currentSeason);
+        }
+    }
+
+    private void ChangeBGMusic(Season season)
     {
         StopAllCoroutines();
 
-        currentSeason = newSeason;
-
         foreach (var item in seasonMusicMapping)
         {
-            if (item.Key == currentSeason)
+            if (item.Key == season)
             {
                 StartCoroutine(Play(item.Value));
             }
@@ -77,7 +78,7 @@ public class SeasonalPlayer : MonoBehaviour
                 break;
             }
 
-            yield return new WaitForSeconds(CoroutineDelay);
+            yield return new WaitForSecondsRealtime(CoroutineDelay);
         }
     }
 
@@ -94,7 +95,14 @@ public class SeasonalPlayer : MonoBehaviour
                 break;
             }
 
-            yield return new WaitForSeconds(CoroutineDelay);
+            yield return new WaitForSecondsRealtime(CoroutineDelay);
         }
+    }
+
+    [Serializable]
+    private struct SeasonalAudioClip
+    {
+        public Season season;
+        public AudioClip audioClip;
     }
 }

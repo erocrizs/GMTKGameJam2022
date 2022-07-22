@@ -130,11 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b96d25872db57b44a5726eb8ed643a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seasonManager: {fileID: 0}
-  springObject: {fileID: 7126300098774396047}
-  summerObject: {fileID: 1146046104}
-  autumnObject: {fileID: 1146046104}
-  winterObject: {fileID: 1146046104}
+  defaultActive: {fileID: 1146046104}
 --- !u!1 &7126300098774396047
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +142,7 @@ GameObject:
   - component: {fileID: 7126300098774396033}
   - component: {fileID: 7126300098774396046}
   - component: {fileID: 1443373647}
+  - component: {fileID: 3645964717827702685}
   m_Layer: 6
   m_Name: GrassyPlatform
   m_TagString: Untagged
@@ -246,3 +243,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 0.25}
   m_EdgeRadius: 0
+--- !u!114 &3645964717827702685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7126300098774396047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bccef1b9d3d94364da5bfb9b7c19434e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeSeasons: 00000000

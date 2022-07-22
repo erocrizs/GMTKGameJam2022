@@ -46,11 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b96d25872db57b44a5726eb8ed643a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seasonManager: {fileID: 0}
-  springObject: {fileID: 638730008494394928}
-  summerObject: {fileID: 638730008116019157}
-  autumnObject: {fileID: 638730008494394928}
-  winterObject: {fileID: 638730008494394928}
+  defaultActive: {fileID: 638730008494394928}
 --- !u!1 &638730008116019157
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,6 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 638730008116019159}
   - component: {fileID: 638730008116019156}
+  - component: {fileID: 7387353410399019602}
   m_Layer: 0
   m_Name: Clmbable LongTree
   m_TagString: Untagged
@@ -139,6 +136,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7387353410399019602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638730008116019157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bccef1b9d3d94364da5bfb9b7c19434e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeSeasons: 01000000
 --- !u!1 &638730008494394928
 GameObject:
   m_ObjectHideFlags: 0
