@@ -6,10 +6,12 @@ using UnityEngine;
 public class EventObservable
 {
     private List<Action> listeners;
+    private List<Action> subscribedOnce;
     
     public EventObservable ()
     {
         listeners = new List<Action>();
+        subscribedOnce = new List<Action>();
     }
 
     public void Subscribe (Action listener)
@@ -24,13 +26,7 @@ public class EventObservable
 
     public void SubscribeOnce (Action listener)
     {
-        void oneTimeListener()
-        {
-            listener();
-            listeners.Remove(oneTimeListener);
-        }
-
-        listeners.Add(oneTimeListener);
+        subscribedOnce.Add(listener);
     }
 
     public void Play ()
@@ -38,5 +34,10 @@ public class EventObservable
         foreach (var listener in listeners) {
             listener();
         }
+        foreach (var listener in subscribedOnce)
+        {
+            listener();
+        }
+        subscribedOnce.Clear();
     }
 }

@@ -17,23 +17,21 @@ public class DieSeasonFace : MonoBehaviour
     public void Update()
     {
         float zRotation = gameObject.transform.rotation.eulerAngles.z;
-        float tolerance = 0.001f;
-
-        if (Mathf.Abs(zRotation - 0) < tolerance)
-        {
-            dieSeason = topSeason;
-        }
-        else if (Mathf.Abs(zRotation - 90) < tolerance)
+        if (45 < zRotation && zRotation <= 135)
         {
             dieSeason = rightSeason;
         }
-        else if (Mathf.Abs(zRotation - 180) < tolerance)
+        else if (135 < zRotation && zRotation <= 225)
         {
             dieSeason = bottomSeason;
         }
-        else if (Mathf.Abs(zRotation - 270) < tolerance)
+        else if (225 < zRotation && zRotation <= 315)
         {
             dieSeason = leftSeason;
+        }
+        else
+        {
+            dieSeason = topSeason;
         }
     }
 }
