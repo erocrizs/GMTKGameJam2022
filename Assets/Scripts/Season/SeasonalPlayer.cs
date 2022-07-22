@@ -13,6 +13,7 @@ public class SeasonalPlayer : MonoBehaviour
     [SerializeField]
     SeasonalAudioClip[] audioClips;
     Dictionary<Season, AudioSource> seasonMusicMapping;
+    Season currentSeason;
 
     const float MUSIC_STEP = 10;
     float CoroutineDelay => switchTime / MUSIC_STEP;
@@ -20,6 +21,7 @@ public class SeasonalPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentSeason = SeasonManager.Main.season;
         seasonMusicMapping = new Dictionary<Season, AudioSource>();
         foreach (var pair in audioClips)
         {
@@ -28,14 +30,22 @@ public class SeasonalPlayer : MonoBehaviour
             var audioSource = childObject.AddComponent<AudioSource>();
             audioSource.playOnAwake = true;
             audioSource.loop = true;
-            audioSource.volume = 0f;
+            audioSource.volume = (currentSeason == pair.season) ? 1f : 0f;
             audioSource.spatialBlend = 0;
             audioSource.clip = pair.audioClip;
             audioSource.Play();
             seasonMusicMapping[pair.season] = audioSource;
         }
+    }
 
-        SeasonManager.SubscribeToSeason(ChangeBGMusic, true);
+    void Update()
+    {
+        var currentSeason = SeasonManager.Main.season;
+        if (this.currentSeason != currentSeason)
+        {
+            this.currentSeason = currentSeason;
+            ChangeBGMusic(this.currentSeason);
+        }
     }
 
     private void ChangeBGMusic(Season season)

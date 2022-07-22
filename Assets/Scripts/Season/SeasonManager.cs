@@ -12,7 +12,7 @@ public enum Season
 public class SeasonManager : MonoBehaviour
 {
     private static SeasonManager main;
-    private static SeasonManager Main
+    public static SeasonManager Main
     {
         get {
             if (main == null || !main.isActiveAndEnabled)
