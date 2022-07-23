@@ -4,21 +4,41 @@ using UnityEngine;
 
 public class OliveMovement : MonoBehaviour
 {
+    float movement;
     [SerializeField]
-    float runSpeed;
-
+    float maxRunSpeed;
+    [SerializeField]
+    float runAccelerationTime;
+    float RunAcceleration => maxRunSpeed / runAccelerationTime;
+    [SerializeField]
+    float runDecelerationTime;
+    float RunDeceleration => maxRunSpeed / runDecelerationTime;
+    [SerializeField]
+    float turnAccelerationTime;
+    float TurnAcceleration => maxRunSpeed / turnAccelerationTime;
     [SerializeField]
     float burstJumpSpeed;
-
     [SerializeField]
     float maxFallSpeed;
+    [SerializeField]
+    float hangTime;
+    float lastGrounded;
+    [SerializeField]
+    float jumpBufferTime;
+    float lastPressedJump;
+    [SerializeField]
+    float riseStopGravityMultiplier;
+    [SerializeField]
+    float fallGravityMultiplier;
+    bool boostJump;
+    float defaultGravityScale;
 
     Rigidbody2D rb;
     OliveAnimator animator;
 
-    bool IsRising => rb.velocity.y > 0;
-    bool IsFalling => rb.velocity.y < 0;
-    bool IsRunning => rb.velocity.x != 0;
+    bool IsRising => rb.velocity.y > 0.1;
+    bool IsFalling => rb.velocity.y < -0.1;
+    bool IsRunning => rb.velocity.x != 0 || movement != 0;
     string[] groundLayers = { "Ground", "Die", "OliveGround",  "MuddyPole" };
     bool IsGrounded {
         get {
@@ -47,6 +67,10 @@ public class OliveMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<OliveAnimator>();
+        defaultGravityScale = rb.gravityScale;
+        lastPressedJump = jumpBufferTime + 1;
+        lastGrounded = hangTime + 1;
+        boostJump = false;
     }
 
     // Update is called once per frame
@@ -54,19 +78,31 @@ public class OliveMovement : MonoBehaviour
     {
         Move();
         Jump();
-        MaintainFall();
+        Fall();
         Animate();
     }
 
     void Move ()
     {
-        float movement = Input.GetAxis("Horizontal Olive");
-        if (movement >= 0.01 || movement <= -0.01)
+        movement = Input.GetAxisRaw("Horizontal Olive");
+
+        // moving
+        if (movement != 0)
         {
-            rb.velocity = new Vector2(Mathf.Sign(movement) * runSpeed, rb.velocity.y);
+            float acceleration = (Mathf.Sign(movement) == Mathf.Sign(rb.velocity.x)) ? RunAcceleration : TurnAcceleration;
+            float acceleratedVxMagnitude = rb.velocity.x + (Mathf.Sign(movement) * acceleration * Time.deltaTime);
+            float cappedVxMagnitude = Mathf.Clamp(acceleratedVxMagnitude, -maxRunSpeed, maxRunSpeed);
+            rb.velocity = new Vector2(cappedVxMagnitude, rb.velocity.y);
         }
-        else
+        // slowing down
+        else if (Mathf.Abs(rb.velocity.x) > 0)
         {
+            float acceleratedVxMagnitude = rb.velocity.x + (-Mathf.Sign(rb.velocity.x) * RunDeceleration * Time.deltaTime);
+            float cappedVxMagnitude = (Mathf.Sign(rb.velocity.x) == Mathf.Sign(acceleratedVxMagnitude)) ? acceleratedVxMagnitude : 0f;
+            rb.velocity = new Vector2(cappedVxMagnitude, rb.velocity.y);
+        }
+        // maintain stop
+        else {
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
@@ -76,22 +112,63 @@ public class OliveMovement : MonoBehaviour
         bool grounded = IsGrounded;
         if (grounded)
         {
-            if (Input.GetButtonDown("Jump"))
+            lastGrounded = 0;
+        }
+        else
+        {
+            lastGrounded += Time.deltaTime;
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            lastPressedJump = 0;
+        }
+        else
+        {
+            lastPressedJump += Time.deltaTime;
+        }
+
+        if (Input.GetButtonUp("Jump"))
+        {
+            boostJump = false;
+        }
+
+        if (lastPressedJump <= jumpBufferTime && lastGrounded <= hangTime)
+        {
+            if (Input.GetButton("Jump"))
             {
-                rb.position = new Vector2(rb.position.x, rb.position.y + 0.05f);
-                rb.AddForce(new Vector2(0, burstJumpSpeed), ForceMode2D.Impulse);
+                boostJump = true;
             }
+
+            lastGrounded = hangTime + 1;
+            lastPressedJump = jumpBufferTime + 1;
+            rb.position = new Vector2(rb.position.x, rb.position.y + 0.05f);
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+            rb.AddForce(new Vector2(0, burstJumpSpeed), ForceMode2D.Impulse);
         }
     }
 
-    void MaintainFall()
+    void Fall()
     {
+        if (rb.velocity.y < 0)
+        {
+            rb.gravityScale = defaultGravityScale * fallGravityMultiplier;
+        }
+        else if (rb.velocity.y > 0 && !boostJump)
+        {
+            rb.gravityScale = defaultGravityScale * riseStopGravityMultiplier;
+        }
+        else
+        {
+            rb.gravityScale = defaultGravityScale;
+        }
+
         rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(rb.velocity.y, -maxFallSpeed));
     }
 
     void Animate ()
     {
-        animator.SetDirection(rb.velocity.x);
+        animator.SetDirection(movement == 0 ?  rb.velocity.x : movement);
         animator.IsFalling = IsFalling;
         animator.IsRising = IsRising;
         animator.IsRunning = IsRunning;

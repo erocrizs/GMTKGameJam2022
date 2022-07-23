@@ -11,6 +11,7 @@ public class OliveAnimator : MonoBehaviour
     public bool IsGrounded;
 
     Animator animator;
+    SpriteRenderer sr;
     Action ChangeState;
     string currentKey;
     string idleKey = "OliveIdle";
@@ -22,6 +23,7 @@ public class OliveAnimator : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
         Idle();
     }
 
@@ -32,7 +34,7 @@ public class OliveAnimator : MonoBehaviour
             return;
         }
 
-        transform.localScale = new Vector3(Mathf.Sign(direction) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        sr.flipX = direction < 0;
     }
 
     void Update ()
@@ -113,7 +115,7 @@ public class OliveAnimator : MonoBehaviour
         {
             Rise();
         }
-        else if (IsFalling)
+        else if (IsFalling && !IsGrounded)
         {
             Fall();
         }
@@ -127,7 +129,18 @@ public class OliveAnimator : MonoBehaviour
     {
         if (!IsRising)
         {
-            Fall();
+            if (!IsGrounded)
+            {
+                Fall();
+            }
+            else if (IsRunning)
+            {
+                Run();
+            }
+            else
+            {
+                Idle();
+            }
         }
     }
 
