@@ -23,6 +23,9 @@ public class OliveMovement : MonoBehaviour
     [SerializeField]
     float hangTime;
     float lastGrounded;
+    [SerializeField]
+    float jumpBufferTime;
+    float lastPressedJump;
 
     Rigidbody2D rb;
     OliveAnimator animator;
@@ -106,7 +109,16 @@ public class OliveMovement : MonoBehaviour
             lastGrounded += Time.deltaTime;
         }
 
-        if (Input.GetButtonDown("Jump") && lastGrounded <= hangTime)
+        if (Input.GetButtonDown("Jump"))
+        {
+            lastPressedJump = 0;
+        }
+        else
+        {
+            lastPressedJump += Time.deltaTime;
+        }
+
+        if (lastPressedJump <= jumpBufferTime && lastGrounded <= hangTime)
         {
             lastGrounded = hangTime + 1;
             rb.position = new Vector2(rb.position.x, rb.position.y + 0.05f);

@@ -160,6 +160,7 @@ MonoBehaviour:
   burstJumpSpeed: 10
   maxFallSpeed: 7
   hangTime: 0.08
+  jumpBufferTime: 0.15
 --- !u!1 &5627422541455312328
 GameObject:
   m_ObjectHideFlags: 0
