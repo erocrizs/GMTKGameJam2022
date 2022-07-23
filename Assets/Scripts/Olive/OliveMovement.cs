@@ -20,6 +20,9 @@ public class OliveMovement : MonoBehaviour
     float burstJumpSpeed;
     [SerializeField]
     float maxFallSpeed;
+    [SerializeField]
+    float hangTime;
+    float lastGrounded;
 
     Rigidbody2D rb;
     OliveAnimator animator;
@@ -96,11 +99,19 @@ public class OliveMovement : MonoBehaviour
         bool grounded = IsGrounded;
         if (grounded)
         {
-            if (Input.GetButtonDown("Jump"))
-            {
-                rb.position = new Vector2(rb.position.x, rb.position.y + 0.05f);
-                rb.AddForce(new Vector2(0, burstJumpSpeed), ForceMode2D.Impulse);
-            }
+            lastGrounded = 0;
+        }
+        else
+        {
+            lastGrounded += Time.deltaTime;
+        }
+
+        if (Input.GetButtonDown("Jump") && lastGrounded <= hangTime)
+        {
+            lastGrounded = hangTime + 1;
+            rb.position = new Vector2(rb.position.x, rb.position.y + 0.05f);
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+            rb.AddForce(new Vector2(0, burstJumpSpeed), ForceMode2D.Impulse);
         }
     }
 
