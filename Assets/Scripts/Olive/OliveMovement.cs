@@ -26,6 +26,12 @@ public class OliveMovement : MonoBehaviour
     [SerializeField]
     float jumpBufferTime;
     float lastPressedJump;
+    [SerializeField]
+    float riseStopGravityMultiplier;
+    [SerializeField]
+    float fallGravityMultiplier;
+    bool boostJump;
+    float defaultGravityScale;
 
     Rigidbody2D rb;
     OliveAnimator animator;
@@ -61,8 +67,10 @@ public class OliveMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<OliveAnimator>();
+        defaultGravityScale = rb.gravityScale;
         lastPressedJump = jumpBufferTime + 1;
         lastGrounded = hangTime + 1;
+        boostJump = false;
     }
 
     // Update is called once per frame
@@ -70,7 +78,7 @@ public class OliveMovement : MonoBehaviour
     {
         Move();
         Jump();
-        MaintainFall();
+        Fall();
         Animate();
     }
 
@@ -120,8 +128,18 @@ public class OliveMovement : MonoBehaviour
             lastPressedJump += Time.deltaTime;
         }
 
+        if (Input.GetButtonUp("Jump"))
+        {
+            boostJump = false;
+        }
+
         if (lastPressedJump <= jumpBufferTime && lastGrounded <= hangTime)
         {
+            if (Input.GetButton("Jump"))
+            {
+                boostJump = true;
+            }
+
             lastGrounded = hangTime + 1;
             lastPressedJump = jumpBufferTime + 1;
             rb.position = new Vector2(rb.position.x, rb.position.y + 0.05f);
@@ -130,8 +148,21 @@ public class OliveMovement : MonoBehaviour
         }
     }
 
-    void MaintainFall()
+    void Fall()
     {
+        if (rb.velocity.y < 0)
+        {
+            rb.gravityScale = defaultGravityScale * fallGravityMultiplier;
+        }
+        else if (rb.velocity.y > 0 && !boostJump)
+        {
+            rb.gravityScale = defaultGravityScale * riseStopGravityMultiplier;
+        }
+        else
+        {
+            rb.gravityScale = defaultGravityScale;
+        }
+
         rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(rb.velocity.y, -maxFallSpeed));
     }
 
