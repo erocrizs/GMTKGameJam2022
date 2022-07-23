@@ -5,26 +5,33 @@ public class DieSeasonFace : MonoBehaviour
 {
     public Season dieSeason = Season.Spring;
 
+    [SerializeField]
+    Season topSeason;
+    [SerializeField]
+    Season rightSeason;
+    [SerializeField]
+    Season bottomSeason;
+    [SerializeField]
+    Season leftSeason;
+
     public void Update()
     {
         float zRotation = gameObject.transform.rotation.eulerAngles.z;
-        float tolerance = 0.001f;
-
-        if (Mathf.Abs(zRotation - 0) < tolerance)
+        if (45 < zRotation && zRotation <= 135)
         {
-            dieSeason = Season.Spring;
+            dieSeason = rightSeason;
         }
-        else if (Mathf.Abs(zRotation - 90) < tolerance)
+        else if (135 < zRotation && zRotation <= 225)
         {
-            dieSeason = Season.Summer;
+            dieSeason = bottomSeason;
         }
-        else if (Mathf.Abs(zRotation - 180) < tolerance)
+        else if (225 < zRotation && zRotation <= 315)
         {
-            dieSeason = Season.Autumn;
+            dieSeason = leftSeason;
         }
-        else if (Mathf.Abs(zRotation - 270) < tolerance)
+        else
         {
-            dieSeason = Season.Winter;
+            dieSeason = topSeason;
         }
     }
 }

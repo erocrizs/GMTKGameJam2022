@@ -45,11 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b96d25872db57b44a5726eb8ed643a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seasonManager: {fileID: 0}
-  springObject: {fileID: 0}
-  summerObject: {fileID: 0}
-  autumnObject: {fileID: 3372524496375567555}
-  winterObject: {fileID: 0}
+  defaultActive: {fileID: 0}
 --- !u!1 &3372524496375567555
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,6 +55,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5231153234614995174}
+  - component: {fileID: 6947001079800499466}
   m_Layer: 0
   m_Name: ClingVines
   m_TagString: Untagged
@@ -82,6 +79,19 @@ Transform:
   m_Father: {fileID: 8250207049654616418}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6947001079800499466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3372524496375567555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bccef1b9d3d94364da5bfb9b7c19434e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeSeasons: 02000000
 --- !u!1 &6115879873991353363
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,41 +5,11 @@ using UnityEngine;
 public class SeasonalGroundTile : MonoBehaviour
 {
     [SerializeField]
-    Season season;
-
-    [SerializeField]
-    Sprite[] autumnSheet;
-
-    [SerializeField]
-    Sprite[] winterSheet;
-
-    [SerializeField]
-    Sprite[] springSheet;
-
-    [SerializeField]
-    Sprite[] summerSheet;
+    Sprite[] spriteSheet;
 
     public void SetSprite(int index)
     {
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
-
-        switch (season)
-        {
-            case Season.Autumn:
-                sr.sprite = autumnSheet[index];
-                break;
-            case Season.Winter:
-                sr.sprite = winterSheet[index];
-                break;
-            case Season.Spring:
-                sr.sprite = springSheet[index];
-                break;
-            case Season.Summer:
-            default:
-                sr.sprite = summerSheet[index];
-                break;
-        }
-
+        GetComponent<SpriteRenderer>().sprite = spriteSheet[index];
         Destroy(this);
     }
 }

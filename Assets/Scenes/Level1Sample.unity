@@ -537,37 +537,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &579402751 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2956017912056319459, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
-  m_PrefabInstance: {fileID: 3300301374359245952}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &579402755
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579402751}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &646207842
 GameObject:
   m_ObjectHideFlags: 0
@@ -2967,6 +2936,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 626948b27e65f424c92986fc51851185, type: 3}
+--- !u!1001 &1687010471
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2956017912056319459, guid: d1c2729c5da39e945af1626e37a1c0fb, type: 3}
+      propertyPath: m_Name
+      value: Winter Rune
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432832470665377278, guid: d1c2729c5da39e945af1626e37a1c0fb, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432832470665377278, guid: d1c2729c5da39e945af1626e37a1c0fb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432832470665377278, guid: d1c2729c5da39e945af1626e37a1c0fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432832470665377278, guid: d1c2729c5da39e945af1626e37a1c0fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432832470665377278, guid: d1c2729c5da39e945af1626e37a1c0fb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432832470665377278, guid: d1c2729c5da39e945af1626e37a1c0fb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432832470665377278, guid: d1c2729c5da39e945af1626e37a1c0fb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432832470665377278, guid: d1c2729c5da39e945af1626e37a1c0fb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432832470665377278, guid: d1c2729c5da39e945af1626e37a1c0fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432832470665377278, guid: d1c2729c5da39e945af1626e37a1c0fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432832470665377278, guid: d1c2729c5da39e945af1626e37a1c0fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d1c2729c5da39e945af1626e37a1c0fb, type: 3}
 --- !u!1001 &1734827772
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3949,75 +3975,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &3300301374359245952
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2956017912056319459, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
-      propertyPath: m_Name
-      value: Season Rune
-      objectReference: {fileID: 0}
-    - target: {fileID: 4432832470665377278, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4432832470665377278, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4432832470665377278, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4432832470665377278, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4432832470665377278, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4432832470665377278, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4432832470665377278, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4432832470665377278, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4432832470665377278, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4432832470665377278, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4432832470665377278, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6362646064003044710, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6684825016145607297, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
-      propertyPath: season
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6684825016145607297, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
-      propertyPath: seasonManager
-      value: 
-      objectReference: {fileID: 1737525453}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2ddc25e94a740814c92ee7928a3b453b, type: 3}
 --- !u!1001 &6051488895808624377
 PrefabInstance:
   m_ObjectHideFlags: 0
