@@ -61,6 +61,8 @@ public class OliveMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<OliveAnimator>();
+        lastPressedJump = jumpBufferTime + 1;
+        lastGrounded = hangTime + 1;
     }
 
     // Update is called once per frame
@@ -121,6 +123,7 @@ public class OliveMovement : MonoBehaviour
         if (lastPressedJump <= jumpBufferTime && lastGrounded <= hangTime)
         {
             lastGrounded = hangTime + 1;
+            lastPressedJump = jumpBufferTime + 1;
             rb.position = new Vector2(rb.position.x, rb.position.y + 0.05f);
             rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.AddForce(new Vector2(0, burstJumpSpeed), ForceMode2D.Impulse);
