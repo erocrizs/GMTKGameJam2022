@@ -70,6 +70,7 @@ GameObject:
   - component: {fileID: 5627422540945471125}
   - component: {fileID: 5627422540945471124}
   - component: {fileID: 5627422540945471127}
+  - component: {fileID: 3327594626383826699}
   m_Layer: 0
   m_Name: Olive
   m_TagString: Untagged
@@ -163,7 +164,21 @@ MonoBehaviour:
   jumpBufferTime: 0.15
   riseStopGravityMultiplier: 2
   fallGravityMultiplier: 2.5
-  boostJump: 0
+--- !u!114 &3327594626383826699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5627422540945471123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b5a7c7c619ed904b983e421ea4cd60f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerNames:
+  - Platform
+  platformIgnoreDuration: 0.1
 --- !u!1 &5627422541455312328
 GameObject:
   m_ObjectHideFlags: 0
