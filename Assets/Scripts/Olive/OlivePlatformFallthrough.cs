@@ -9,18 +9,18 @@ public class OlivePlatformFallthrough : MonoBehaviour
     [SerializeField]
     float platformIgnoreDuration;
     Collider2D oliveCollider;
-    List<Collider2D> platformColliders;
+    List<Collider2D> platformCollidersInContact;
 
     private void Start()
     {
         oliveCollider = GetComponent<Collider2D>();
-        platformColliders = new List<Collider2D>();
+        platformCollidersInContact = new List<Collider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxisRaw("Vertical Olive") < 0 && platformColliders.Count > 0)
+        if (Input.GetAxisRaw("Vertical Olive") < 0 && platformCollidersInContact.Count > 0)
         {
             StartCoroutine(DisablePlatformCollision());
         }
@@ -28,16 +28,17 @@ public class OlivePlatformFallthrough : MonoBehaviour
 
     IEnumerator DisablePlatformCollision ()
     {
-        IgnorePlatformCollision(true);
+        var platformColliders = new List<Collider2D>(platformCollidersInContact);
+        IgnorePlatformCollision(platformColliders, true);
         yield return new WaitForSeconds(platformIgnoreDuration);
-        IgnorePlatformCollision(false);
+        IgnorePlatformCollision(platformColliders, false);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (IsPlatformLayer(collision.gameObject))
         {
-            platformColliders.Add(collision.gameObject.GetComponent<Collider2D>());
+            platformCollidersInContact.Add(collision.gameObject.GetComponent<Collider2D>());
         }
     }
 
@@ -45,7 +46,7 @@ public class OlivePlatformFallthrough : MonoBehaviour
     {
         if (IsPlatformLayer(collision.gameObject))
         {
-            platformColliders.Remove(collision.gameObject.GetComponent<Collider2D>());
+            platformCollidersInContact.Remove(collision.gameObject.GetComponent<Collider2D>());
         }
     }
 
@@ -55,7 +56,7 @@ public class OlivePlatformFallthrough : MonoBehaviour
         return layerMask == (layerMask | 1 << gameObject.layer);
     }
 
-    void IgnorePlatformCollision (bool ignore)
+    void IgnorePlatformCollision (List<Collider2D> platformColliders, bool ignore)
     {
         foreach (var collider in platformColliders)
         {

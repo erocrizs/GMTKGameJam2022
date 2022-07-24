@@ -178,7 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerNames:
   - Platform
-  platformIgnoreDuration: 0.1
+  platformIgnoreDuration: 0.3
 --- !u!1 &5627422541455312328
 GameObject:
   m_ObjectHideFlags: 0
