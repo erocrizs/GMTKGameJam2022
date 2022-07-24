@@ -22,7 +22,7 @@ public class OliveDetector : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Olive")
+        if (collision.CompareTag("Olive"))
         {
             isOliveInside = true;
 
@@ -42,7 +42,7 @@ public class OliveDetector : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Olive")
+        if (collision.CompareTag("Olive"))
         {
             isOliveInside = false;
 

@@ -52,8 +52,6 @@ public class DieMovement : MonoBehaviour
         Move = RollHorizontal;
         onStop = new EventObservable();
         defaultDiePlatformRotation = diePlatform.transform.rotation;
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Die"), LayerMask.NameToLayer("OliveGround"));
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("DieMoving"), LayerMask.NameToLayer("OliveGround"));
     }
 
     // Update is called once per frame

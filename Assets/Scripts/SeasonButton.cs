@@ -31,9 +31,17 @@ public class SeasonButton : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "Die")
+        if (collision.CompareTag("Die"))
         {
-            FindObjectOfType<DieMovement>().OnStop.SubscribeOnce(ChangeSeasonBasedOnDie);
+            FindObjectOfType<DieMovement>().OnStop.Subscribe(ChangeSeasonBasedOnDie);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Die"))
+        {
+            FindObjectOfType<DieMovement>().OnStop.Unsubscribe(ChangeSeasonBasedOnDie);
         }
     }
 }

@@ -21,11 +21,11 @@ public class ExitGame : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "Olive")
+        if (collision.CompareTag("Olive"))
         {
             oliveReady = true;
         }
-        if (collision.name == "Die")
+        if (collision.CompareTag("Die"))
         {
             dieReady = true;
         }
@@ -33,15 +33,13 @@ public class ExitGame : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.name == "Olive")
+        if (collision.CompareTag("Olive"))
         {
             oliveReady = false;
         }
-        if (collision.name == "Die")
+        if (collision.CompareTag("Die"))
         {
             dieReady = false;
         }
     }
-
-
 }

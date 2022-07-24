@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7252677321430257412}
   - component: {fileID: 7252677321430257413}
   - component: {fileID: 7252677321430257410}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: MuddyPole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
