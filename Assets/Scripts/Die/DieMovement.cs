@@ -15,17 +15,15 @@ public class DieMovement : MonoBehaviour
     float maxFallSpeed;
 
     [SerializeField]
-    GameObject olive;
+    GameObject diePlatform;
+    Quaternion defaultDiePlatformRotation;
 
     bool isMoving = false;
     float moveLerp = 1;
     float moveDirection = 0;
     Vector2 preMovementPosition;
     Rigidbody2D rb;
-    OliveDetector oliveDetector;
     Action Move;
-    Collider2D oliveCollider;
-    Collider2D dieCollider;
     EventObservable onStop;
     public EventObservable OnStop => onStop;
 
@@ -51,11 +49,9 @@ public class DieMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        oliveDetector = GetComponentInChildren<OliveDetector>();
         Move = RollHorizontal;
-        oliveCollider = olive.GetComponent<BoxCollider2D>();
-        dieCollider = GetComponent<BoxCollider2D>();
         onStop = new EventObservable();
+        defaultDiePlatformRotation = diePlatform.transform.rotation;
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Die"), LayerMask.NameToLayer("OliveGround"));
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("DieMoving"), LayerMask.NameToLayer("OliveGround"));
     }
@@ -246,15 +242,8 @@ public class DieMovement : MonoBehaviour
         isMoving = false;
         moveDirection = 0;
         
-        /*if (oliveDetector.IsOliveInside)
-        {
-            oliveDetector.SubscribeExitOnce(() => IgnoreOliveCollision(false));
-        }
-        else
-        {
-            IgnoreOliveCollision(false);
-        }*/
-
+        DisablePlatformCollision(false);
+        diePlatform.transform.rotation = defaultDiePlatformRotation;
         rb.position = RoundVector(rb.position);
     }
 
@@ -268,14 +257,13 @@ public class DieMovement : MonoBehaviour
     void RollStart (float direction, Action NextRoll)
     {
         isMoving = true;
-        //IgnoreOliveCollision(true);
+        DisablePlatformCollision(true);
         moveDirection = direction;
         ResetRoll(NextRoll);
     }
 
-    /*void IgnoreOliveCollision (bool ignore)
+    void DisablePlatformCollision (bool ignore)
     {
-        Physics2D.IgnoreCollision(oliveCollider, dieCollider, ignore);
-        this.gameObject.layer = ignore ? LayerMask.NameToLayer("DieMoving") : LayerMask.NameToLayer("Die");
-    }*/
+        diePlatform.SetActive(!ignore);
+    }
 }

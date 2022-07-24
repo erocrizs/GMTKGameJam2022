@@ -151,7 +151,7 @@ MonoBehaviour:
   horizontalRollTime: 0.5
   verticalRollTime: 0.2
   maxFallSpeed: 7
-  olive: {fileID: 0}
+  diePlatform: {fileID: 5636012541125917224}
 --- !u!114 &5664705208329278246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +226,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb2ef9d051ae9ca4b9255ed8abc918fa, type: 3}
+--- !u!1 &5636012541125917224 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6532720297659405619, guid: fb2ef9d051ae9ca4b9255ed8abc918fa, type: 3}
+  m_PrefabInstance: {fileID: 1486119656334683931}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5696200237430820004 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6598677370901799871, guid: fb2ef9d051ae9ca4b9255ed8abc918fa, type: 3}
