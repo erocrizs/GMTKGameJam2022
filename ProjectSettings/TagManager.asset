@@ -10,15 +10,15 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Platform
+  - Olive
   - Water
   - UI
   - Ground
-  - OliveGround
+  - Platform
   - Die
   - DieMoving
   - MuddyPole
-  - Olive
+  - 
   - 
   - 
   - 
