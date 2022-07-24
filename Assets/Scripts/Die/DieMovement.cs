@@ -246,14 +246,14 @@ public class DieMovement : MonoBehaviour
         isMoving = false;
         moveDirection = 0;
         
-        if (oliveDetector.IsOliveInside)
+        /*if (oliveDetector.IsOliveInside)
         {
             oliveDetector.SubscribeExitOnce(() => IgnoreOliveCollision(false));
         }
         else
         {
             IgnoreOliveCollision(false);
-        }
+        }*/
 
         rb.position = RoundVector(rb.position);
     }
@@ -268,14 +268,14 @@ public class DieMovement : MonoBehaviour
     void RollStart (float direction, Action NextRoll)
     {
         isMoving = true;
-        IgnoreOliveCollision(true);
+        //IgnoreOliveCollision(true);
         moveDirection = direction;
         ResetRoll(NextRoll);
     }
 
-    void IgnoreOliveCollision (bool ignore)
+    /*void IgnoreOliveCollision (bool ignore)
     {
         Physics2D.IgnoreCollision(oliveCollider, dieCollider, ignore);
         this.gameObject.layer = ignore ? LayerMask.NameToLayer("DieMoving") : LayerMask.NameToLayer("Die");
-    }
+    }*/
 }
