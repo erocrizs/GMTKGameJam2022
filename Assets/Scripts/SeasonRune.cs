@@ -7,7 +7,7 @@ public class SeasonRune : MonoBehaviour
     public Season season;
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "Olive" || collision.name == "Die")
+        if (collision.CompareTag("Olive") || collision.CompareTag("Die"))
         {
             SeasonManager.Main.season = season;
         }
